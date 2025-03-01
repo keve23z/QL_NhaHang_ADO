@@ -1,0 +1,58 @@
+﻿
+@model List<QL_NhaHang_ADO.Models.NguyenLieu>
+<tr>
+    <td>
+        <select name="ChiTietHoaDon[][TenNguyenLieu]" class="form-control" onchange="fetchIngredientDetails(this)" required>
+            <option value="">Chọn Nguyên Liệu</option>
+            @foreach (var nguyenLieu in Model)
+            {
+                <option value="@nguyenLieu.TenNguyenLieu">@nguyenLieu.TenNguyenLieu</option>
+            }
+        </select>
+    </td>
+    <td>
+        <input type="text" name="ChiTietHoaDon[][MaNguyenLieu]" class="form-control" placeholder="Mã Nguyên Liệu" readonly>
+    </td>
+    <td>
+        <input type="number" name="ChiTietHoaDon[][SoLuong]" class="form-control" placeholder="Số Lượng" required>
+    </td>
+    <td>
+        <input type="text" name="ChiTietHoaDon[][DVT]" class="form-control" placeholder="Đơn Vị Tính" readonly>
+    </td>
+    <td>
+        <input type="number" name="ChiTietHoaDon[][DonGia]" class="form-control" placeholder="Đơn Giá" readonly>
+    </td>
+    <td>
+        <input type="number" name="ChiTietHoaDon[][ThanhTien]" class="form-control" placeholder="Thành Tiền" readonly>
+    </td>
+    <td>
+        <button type="button" class="btn btn-outline-dark" onclick="this.closest('tr').remove()">
+            <i class="bi bi-trash"></i>
+        </button>
+    </td>
+</tr>
+<script>
+    function fetchIngredientDetails(selectElement) {
+        const selectedName = selectElement.value;
+
+        if (selectedName) {
+            // Gọi API để lấy thông tin chi tiết nguyên liệu
+            fetch(`/Admin_HoaDon/GetNguyenLieuDetails?tenNguyenLieu=${encodeURIComponent(selectedName)}`)
+                .then(response => response.json())
+                .then(data => {
+                    // Lấy hàng hiện tại
+                    const row = selectElement.closest('tr');
+
+                    if (data.MaNguyenLieu) {
+                        // Điền thông tin vào các trường
+                        row.querySelector('[name*="[MaNguyenLieu]"]').value = data.MaNguyenLieu;
+                        row.querySelector('[name*="[DVT]"]').value = data.DVT;
+                        row.querySelector('[name*="[DonGia]"]').value = data.DonGia;
+                    } else {
+                        alert(data.error); // Nếu không tìm thấy nguyên liệu
+                    }
+                })
+                .catch(error => console.error('Lỗi khi lấy thông tin nguyên liệu:', error));
+        }
+    }
+</script>

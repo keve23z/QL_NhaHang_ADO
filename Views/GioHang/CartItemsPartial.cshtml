@@ -1,0 +1,184 @@
+﻿@model List<QL_NhaHang_ADO.Models.GioHang>
+
+@if (Model != null && Model.Count > 0)
+{
+    <div class="cart-container" style="margin: 20px auto; width: 80%; font-family: Arial, sans-serif; border: 1px solid #ddd; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+        <h2 style="text-align: center; margin: 15px 0; color: #333;">Giỏ Hàng</h2>
+
+        <!-- Form bọc danh sách sản phẩm -->
+        <form id="cart-form" method="post" action="@Url.Action("HienThiHoaDonVaQRThanhToan", "GioHang")">
+            <table style="width: 100%; border-collapse: collapse; margin: 20px 0;">
+                <thead>
+                    <tr style="background-color: #f8f9fa; border-bottom: 2px solid #ddd; color: #555;">
+                        <th style="padding: 12px; text-align: center;">Ảnh</th>
+                        <th style="padding: 12px; text-align: left;">Tên món</th>
+                        <th style="padding: 12px; text-align: center;">Số lượng</th>
+                        <th style="padding: 12px; text-align: right;">Đơn giá</th>
+                        <th style="padding: 12px; text-align: right;">Thành tiền</th>
+                        <th style="padding: 12px; text-align: center;">Hành động</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{ double tongTien = 0; }
+                    @foreach (var item in Model)
+                    {
+                        <tr style="border-bottom: 1px solid #ddd; vertical-align: middle;">
+                            <td style="padding: 12px; text-align: center;">
+                                <img src="@Url.Content("/Images/MonAn/" + item.AnhMon)"
+                                     alt="@item.TenMonAn"
+                                     style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover;">
+                            </td>
+                            <td style="padding: 12px; text-align: left; color: #555;">@item.TenMonAn</td>
+                            <td style="padding: 12px; text-align: center;">
+                                <input type="number"
+                                       name="Items[@item.MaMonAn].SoLuong"
+                                       value="@item.SoLuong"
+                                       min="1"
+                                       style="width: 50px; text-align: center; margin: 0 5px; border: 1px solid #ddd; border-radius: 4px;"
+                                       onchange="updateQuantity('@item.MaMonAn', this.value)">
+                            </td>
+                            <td style="padding: 12px; text-align: right; color: #555;">@((item.DonGia).ToString("N0")) ₫</td>
+                            <td style="padding: 12px; text-align: right; color: #555;">@((item.ThanhTien).ToString("N0")) ₫</td>
+                            <td style="padding: 12px; text-align: center;">
+                                <button type="button" class="btn btn-sm btn-warning" onclick="removeItem('@item.MaMonAn')"
+                                        style="padding: 5px 10px; background-color: #ffc107; color: white; border: none; border-radius: 4px;">
+                                    Xóa
+                                </button>
+                            </td>
+                        </tr>
+                        tongTien += item.ThanhTien;
+                    }
+                </tbody>
+            </table>
+            <div style="display: flex; justify-content: space-between; align-items: center; padding: 20px; background-color: #f8f9fa; border-top: 2px solid #ddd;">
+                <div style="font-size: 18px; font-weight: bold; color: #555;">
+                    Tổng Tiền: <span style="color: red;">@tongTien.ToString("N0") ₫</span>
+                </div>
+                <div>
+                    <!-- Mã giảm giá -->
+                    <label>Mã giảm giá:</label>
+                    <input type="text" name="MaGiamGia" id="MaGiamGia" onchange="validateDiscountCode()" style="margin-left: 10px; padding: 5px; border: 1px solid #ddd; border-radius: 4px;">
+                    <span id="discount-message" style="margin-left: 10px; color: red;"></span>
+                </div>
+                <!-- Nút Thanh Toán -->
+                <button type="submit" style="background-color: #ff8d25; color: white; padding: 10px 20px; font-size: 16px; font-weight: bold; border: none; border-radius: 5px; cursor: pointer;">
+                    Thanh Toán
+                </button>
+            </div>
+        </form>
+    </div>
+}
+else
+{
+    <div class="text-center" style="margin: 50px auto; font-size: 18px; font-weight: bold; color: #555;">Giỏ hàng trống</div>
+}
+
+<script>
+    function updateQuantity(maMonAn, soLuong) {
+        $.ajax({
+            url: '/GioHang/CapNhatSoLuong',
+            type: 'POST',
+            data: { maMonAn: maMonAn, soLuong: soLuong },
+            success: function (response) {
+                if (response.success) {
+                    updateCart(); // Cập nhật lại giỏ hàng sau khi thay đổi thành công
+                } else {
+                    Swal.fire({
+                        title: "Lỗi!",
+                        text: "Không thể cập nhật số lượng. Vui lòng thử lại.",
+                        icon: "error"
+                    });
+                }
+            },
+            error: function (err) {
+                console.log('Error:', err);
+                Swal.fire({
+                    title: "Lỗi!",
+                    text: "Có lỗi xảy ra khi cập nhật số lượng.",
+                    icon: "error"
+                });
+            }
+        });
+    }
+);
+    }
+
+    function updateCart() {
+        $.ajax({
+            url: '/GioHang/GetCartItems',
+            type: 'GET',
+            success: function (response) {
+                $('#cart-container').html(response);
+            },
+            error: function (error) {
+                console.log("Lỗi khi tải giỏ hàng:", error);
+            }
+        });
+    }
+
+    function removeItem(maMonAn) {
+        Swal.fire({
+            title: "Bạn có chắc chắn?",
+            text: "Sản phẩm này sẽ bị xóa khỏi giỏ hàng!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Đồng ý",
+            cancelButtonText: "Hủy"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: '/GioHang/RemoveItem',
+                    type: 'POST',
+                    data: { maMonAn: maMonAn },
+                    success: function (response) {
+                        updateCart();
+                        Swal.fire({
+                            title: "Đã xóa!",
+                            text: "Sản phẩm đã được xóa khỏi giỏ hàng.",
+                            icon: "success"
+                        });
+                    },
+                    error: function (err) {
+                        Swal.fire({
+                            title: "Lỗi!",
+                            text: "Không thể xóa sản phẩm. Vui lòng thử lại.",
+                            icon: "error"
+                        });
+                    }
+                });
+            }
+        });
+    }
+
+    // Kiểm tra mã giảm giá khi thay đổi giá trị
+    function validateDiscountCode() {
+        var discountCode = $('#MaGiamGia').val();
+        $.ajax({
+            url: '/GioHang/KiemTraMa',
+            type: 'POST',
+            data: { discountCode: discountCode },
+            success: function (response) {
+                if (response) {
+                    $('#discount-message').text('Mã giảm giá hợp lệ');
+                } else {
+                    $('#discount-message').text('Mã giảm giá không hợp lệ');
+                }
+            },
+            error: function (error) {
+                console.log('Error:', error);
+            }
+        });
+    }
+
+    // Kiểm tra mã giảm giá trước khi submit form
+    $("#cart-form").submit(function (e) {
+        var discountCode = $('#MaGiamGia').val();
+
+        // Nếu mã giảm giá trống hoặc không hợp lệ, gán giá trị là "No"
+        if (discountCode.trim() === "" || $('#discount-message').text() === 'Mã giảm giá không hợp lệ') {
+            $('#MaGiamGia').val('No');
+        }
+    });
+</script>

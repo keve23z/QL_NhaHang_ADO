@@ -1,0 +1,163 @@
+﻿@model QL_NhaHang_ADO.Models.PhieuDatBan
+
+<section class="reservation-section booking">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="section-title">
+                    <h6 class="sub-title">Đặt Bàn & Đặt Chỗ</h6>
+                </div>
+            </div>
+        </div>
+
+        @using (Html.BeginForm("DatBan", "DatBan", FormMethod.Post, new { @id = "reservation-form", @class = "form", @autocomplete = "off" }))
+        {
+            <div class="row">
+                <!-- Số người -->
+                <div class="col-lg-3 col-md-6">
+                    <div class="form-group">
+                        @Html.DropDownListFor(model => model.SoLuong, new SelectList(new List<object> {
+                            new { Value = 1, Text = "1 Người" },
+                            new { Value = 2, Text = "2 Người" },
+                            new { Value = 3, Text = "3 Người" },
+                            new { Value = 4, Text = "4 Người" },
+                            new { Value = 5, Text = "5 Người" },
+                            new { Value = 6, Text = "6 Người" }
+                        }, "Value", "Text", 0), "Chọn số người", new { @class = "wide" })
+                    </div>
+                </div>
+                <!-- Ngày đặt -->
+                <div class="col-lg-3 col-md-6">
+                    <div class="form-group">
+                        @Html.TextBoxFor(model => model.NgayDat, "", new { @id = "datepicker", @class = "reservation-date", @placeholder = "Chọn Ngày" })
+                    </div>
+                </div>
+                <!-- Thời gian -->
+                <div class="col-lg-3 col-md-6">
+                    <div class="form-group">
+                        @Html.DropDownListFor(model => model.GIODAT, new SelectList(new List<object> {
+                             new { Value = "08:00", Text = "08:00" },
+                             new { Value = "08:30", Text = "08:30" },
+                             new { Value = "09:00", Text = "09:00" },
+                             new { Value = "09:30", Text = "09:30" },
+                             new { Value = "10:00", Text = "10:00" },
+                             new { Value = "10:30", Text = "10:30" },
+                             new { Value = "11:00", Text = "11:00" },
+                             new { Value = "11:30", Text = "11:30" },
+                             new { Value = "12:00", Text = "12:00" },
+                             new { Value = "12:30", Text = "12:30" },
+                             new { Value = "13:00", Text = "13:00" },
+                             new { Value = "13:30", Text = "13:30" },
+                             new { Value = "14:00", Text = "14:00" },
+                             new { Value = "14:30", Text = "14:30" },
+                             new { Value = "15:00", Text = "15:00" },
+                             new { Value = "15:30", Text = "15:30" },
+                             new { Value = "16:00", Text = "16:00" },
+                             new { Value = "16:30", Text = "16:30" },
+                             new { Value = "17:00", Text = "17:00" },
+                             new { Value = "17:30", Text = "17:30" },
+                             new { Value = "18:00", Text = "18:00" },
+                             new { Value = "18:30", Text = "18:30" },
+                             new { Value = "19:00", Text = "19:00" },
+                             new { Value = "19:30", Text = "19:30" },
+                             new { Value = "20:00", Text = "20:00" }
+                         }, "Value", "Text"), "Chọn giờ đặt", new { @class = "wide", @id = "timepicker" })
+                    </div>
+                </div>
+                <!-- Nút đặt bàn -->
+                <div class="col-lg-3 col-md-6">
+                    <div class="form-group">
+                        <button type="submit" class="default-btn">Đặt Bàn <span></span></button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Thông tin khách hàng -->
+            <div class="row">
+                <div class="col-lg-3 col-md-6">
+                    <div class="form-group">
+                        @Html.TextBoxFor(model => model.TenKH, new { @class = "form-control", @placeholder = "Tên khách hàng", @required = "required" })
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <div class="form-group">
+                        @Html.TextBoxFor(model => model.Email, new { @class = "form-control", @placeholder = "Email", @required = "required" })
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <div class="form-group">
+                        @Html.TextBoxFor(model => model.SDT, new { @class = "form-control", @placeholder = "Số điện thoại", @required = "required" })
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</section>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+    $(document).ready(function () {
+        $("#datepicker").datepicker({
+            dateFormat: "yy-mm-dd",
+            minDate: 0,
+            onSelect: validateDateAndTime
+        });
+
+        $("#timepicker").on("change", validateDateAndTime);
+
+        function validateDateAndTime() {
+            const selectedDate = $("#datepicker").val();
+            const selectedTime = $("#timepicker").val();
+
+            if (!selectedDate || !selectedTime) return true;
+
+            const now = new Date();
+            const selectedDateTime = new Date(`${selectedDate}T${selectedTime}`);
+
+            if (selectedDateTime <= now) {
+                Swal.fire({
+                    icon: "error",
+                    title: "Thời gian không hợp lệ",
+                    text: "Vui lòng chọn ngày và giờ trong tương lai!"
+                });
+                $("#timepicker").val("");
+                return false;
+            }
+            return true;
+        }
+
+        $("#reservation-form").on("submit", function (event) {
+            if (!validateDateAndTime()) {
+                event.preventDefault();
+                return;
+            }
+
+            Swal.fire({
+                title: "Xác nhận đặt bàn?",
+                text: "Bạn có chắc chắn muốn gửi thông tin này?",
+                icon: "question",
+                showCancelButton: true,
+                confirmButtonText: "Xác nhận",
+                cancelButtonText: "Hủy"
+            }).then((result) => {
+                if (!result.isConfirmed) {
+                    event.preventDefault();
+                } else {
+                    // Hiển thị thông báo thành công
+                    Swal.fire({
+                        title: "Đặt bàn thành công!",
+                        text: "Thông tin của bạn đã được gửi đi.",
+                        icon: "success",
+                        confirmButtonText: "OK"
+                    });
+                }
+            });
+        });
+    });
+</script>

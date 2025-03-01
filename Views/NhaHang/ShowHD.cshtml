@@ -1,0 +1,90 @@
+﻿@model IEnumerable<QL_NhaHang_ADO.Models.HoaDon>
+
+@{
+    ViewBag.Title = "ShowHD";
+    Layout = "~/Views/Share/layuot_admin.cshtml";
+}
+
+
+<h2 class="text-center my-4" style="color: #fa8f23">DANH SÁCH HOÁ ĐƠN</h2>
+@using (Html.BeginForm("ShowHD", "NhaHang", FormMethod.Get))
+{
+    <div class="container mt-4">
+        <div class="row g-3 align-items-center">
+            <div class="col-md-4">
+                <label for="NgayBD" class="form-label">Ngày bắt đầu:</label>
+                <input type="date" id="NgayBD" name="ngayBD" class="form-control" />
+            </div>
+            <div class="col-md-4">
+                <label for="NgayKT" class="form-label">Ngày kết thúc:</label>
+                <input type="date" id="NgayKT" name="ngayKT" class="form-control" />
+            </div>
+            <div class="col-md-4 d-flex align-items-end">
+                <button type="submit" class="btn btn-primary w-100">Lọc</button>
+            </div>
+        </div>
+    </div>
+}
+
+<div class="card shadow-lg mb-4">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-striped table-hover" id="customButtons">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Mã Hóa Đơn</th>
+                        <th>Mã Bàn</th>
+                        <th>Mã Khách Hàng</th>
+                        <th>Tên Khách Hàng</th>
+                        <th>Mã Nhân Viên</th>
+                        <th>Mã Giảm Giá</th>
+                        <th>Ngày Lập</th>
+                        <th>Hình Thức</th>
+                        <th>Hành Động</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@Html.DisplayFor(modelItem => item.Ma)</td>
+                            <td>@Html.DisplayFor(modelItem => item.MaBan)</td>
+                            <td>@Html.DisplayFor(modelItem => item.MaKH)</td>
+                            <td>@Html.DisplayFor(modelItem => item.TenKhachHang)</td>
+                            <td>@Html.DisplayFor(modelItem => item.MaNV)</td>
+                            <td>@Html.DisplayFor(modelItem => item.MaGiamGia)</td>
+                            <td>
+                                @if (item.NgayLap.HasValue)
+                                {
+                                    @item.NgayLap.Value.ToString("dd/MM/yyyy")
+                                }
+                                else
+                                {
+                                    <span class="text-muted">Không có ngày</span>
+                                }
+                            </td>
+                            <td>@Html.DisplayFor(modelItem => item.HinhThuc)</td>
+                            <td>
+                                <a href="@Url.Action("ShowCTHD", new { ma = item.Ma })" class="btn btn-sm btn-info">Xem Chi Tiết</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script>
+    function searchHoaDon() {
+        var searchValue = document.getElementById('searchField').value;
+        if (searchValue) {
+            // Chuyển hướng đến trang hiện tại với tham số tìm kiếm
+            window.location.href = '@Url.Action("Index", "NhaHang")?txt_Search=' + searchValue;
+        } else {
+            // Nếu trường tìm kiếm trống, quay lại trang mà không có tham số tìm kiếm
+            window.location.href = '@Url.Action("Index", "NhaHang")';
+        }
+    }
+</script>
+

@@ -1,0 +1,48 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>ConfirmEmail</title>
+</head>
+<body>
+    <div class="container mt-5" style="display:none">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header bg-success text-white text-center">
+                        <h4>Xác nhận email thành công!</h4>
+                    </div>
+                    <div class="card-body text-center">
+                        <p>Bạn có thể đăng nhập ngay lúc này</p>
+                        <a href="@Html.Action("DangNhap", "Account")" class="btn btn-primary">Nhập thông tin</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    @if (TempData["Message"] != null)
+    {
+        <text>
+            // Hiển thị SweetAlert2 sau khi đăng nhập thành công
+            Swal.fire({
+            title: 'Tài Khoản đã được xác thực thành công!',
+            icon: 'success',
+            showConfirmButton: false,
+            timer: 3000
+            }).then(function () {
+            // Chuyển hướng sau khi SweetAlert hoàn tất
+            window.location.href = '@Url.Action("DangNhap", "Account")';
+            });
+        </text>;
+    }
+    </script>
+</body>
+</html>

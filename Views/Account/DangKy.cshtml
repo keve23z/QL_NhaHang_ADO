@@ -1,0 +1,305 @@
+﻿@model QL_NhaHang_ADO.Models.TaiKhoan
+@using System.Web.Mvc.Html;
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DangKy</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+          crossorigin="anonymous" />
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+    <link rel="stylesheet"
+          href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" />
+    <link rel="shortcut icon"
+          href="../Home/images/shorticon.ico"
+          type="image/x-icon" />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+        body {
+            background-image: url(/images/bg5.jpg);
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            box-sizing: border-box;
+            font-family: "Poppins", sans-serif;
+        }
+
+        .container {
+            display: block;
+            position: relative;
+            max-width: 450px;
+            max-height: 700px;
+            backdrop-filter: blur(3px);
+            border: 1px solid var(--primary-color);
+            border-radius: 15px;
+            padding: 5.3em 2.5em 4em 2.5em;
+            color: var(--primary-color);
+            box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        .signup-header {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #755c3d;
+            width: 140px;
+            height: 70px;
+            border-radius: 0 0 20px 20px;
+        }
+
+            .signup-header span {
+                font-size: 30px;
+                color: #a77f44;
+                font-weight: bold;
+            }
+
+            .signup-header::before {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: -30px;
+                width: 30px;
+                height: 30px;
+                border-top-right-radius: 50%;
+                background: transparent;
+                box-shadow: 15px 0 0 0 #755c3d;
+            }
+
+            .signup-header::after {
+                content: "";
+                position: absolute;
+                top: 0;
+                right: -30px;
+                width: 30px;
+                height: 30px;
+                border-top-left-radius: 50%;
+                background: transparent;
+                box-shadow: -15px 0 0 0 #755c3d;
+            }
+
+        .form-check {
+            display: flex;
+            justify-content: space-between;
+            font-size: 15px;
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--second-color);
+        }
+
+            a:hover {
+                text-decoration: underline;
+                color: #a77f44;
+            }
+
+        .form-control {
+            border-radius: 50px;
+            padding: 10px 15px;
+            border: none;
+            box-shadow: 0 0 8px gray;
+        }
+
+        #input-box {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-control:hover {
+            background-color: #EDCF9F;
+        }
+
+        .icon {
+            position: absolute;
+            top: 10px;
+            right: 37px;
+            font-size: 20px;
+        }
+
+        .signup_footer {
+            width: fit-content;
+            margin: 0 auto;
+            padding: 8px 20px;
+        }
+
+        #buttondangky {
+            background-color: #a77f44;
+            border: none;
+            padding: 5px 20px;
+            border-radius: 15px;
+            color: white;
+            font-weight: bold;
+        }
+
+            #buttondangky:hover {
+                /*background-color: #EDCF9F;*/
+                box-shadow: 0px 0px 8px 8px #EDCF9F;
+            }
+
+        .register a {
+            color: #EDCF9F;
+        }
+
+        .form-label {
+            color: black;
+            margin-top: -20px;
+        }
+
+        .text-danger {
+            color: red;
+            font-weight: bold;
+            height: fit-content;
+            margin: 0px;
+            padding: 5px;
+        }
+    </style>
+</head>
+<body style="overflow:hidden;">
+    <div class="container mt-5">
+        <div class="signup-header">
+            <span><a href="#" style="text-decoration: none; color:white">Sign Up</a></span>
+        </div>
+        @*<form method="post" id="signupForm">*@
+        @using (Html.BeginForm(new { id = "dangkyForm" }))
+        {
+            <div class="mb-3">
+                <label for="usn" class="form-label">Tên đăng nhập:</label>
+
+                <div id="input-box">
+                    @*<input type="text"
+                        class="form-control"
+                        id="signup-username"
+                        placeholder="Enter username"
+                        name="uname"
+                        required />*@
+
+                    @Html.TextBoxFor(model => model.TenDangNhap, new { @class = "form-control", placeholder = "Enter username", id = "signup-username", name = "uname" })
+                    @Html.ValidationMessageFor(model => model.TenDangNhap, "", new { @class = "text-danger" })
+                    <i class="bx bx-user icon"></i>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="pwd" class="form-label">Mật khẩu:</label>
+                <div id="input-box">
+                    @*<input type="password"
+                        class="form-control"
+                        id="signup-password"
+                        placeholder="Enter password"
+                        name="pswd"
+                        required />*@
+                    @Html.PasswordFor(model => model.MatKhau, new { @class = "form-control", placeholder = "Enter username", id = "signup-password", name = "pswd" })
+                    @Html.ValidationMessageFor(model => model.MatKhau, "", new { @class = "text-danger" })
+                    <i class="bx bx-lock-alt icon"></i>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="pwd" class="form-label">Xác nhận mật khẩu:</label>
+                <div id="input-box">
+                    @*<input type="email"
+                        class="form-control"
+                        id="signup-email"
+                        placeholder="Enter email"
+                        name="email"
+                        required />*@
+                    @Html.PasswordFor(model => model.XacNhanMatKhau, new { @class = "form-control", placeholder = "Nhập lại mật khẩu", id = "signup-comfirm", name = "pscwd" })
+                    @Html.ValidationMessageFor(model => model.XacNhanMatKhau, "", new { @class = "text-danger" })
+                    <i class="bx bx-at icon"></i>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="pwd" class="form-label">Email:</label>
+                <div id="input-box">
+                    @*<input type="number"
+                        class="form-control"
+                        id="signup-phone"
+                        placeholder="Enter phone"
+                        name="pswd"
+                        required />*@
+                    @Html.TextBoxFor(model => model.Email, new { @class = "form-control", placeholder = "Enter email", id = "signup-email", name = "email" })
+                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                    <i class="bx bx-phone icon"></i>
+                </div>
+            </div>
+
+            <div class="signup_footer">
+                <button id="buttondangky"
+                        type="submit"
+                        onclick="document.getElementById('dangkyForm').submit();"
+                        class="btn btn-success">
+                    Sign Up
+                </button>
+            </div>
+            <div class="register mt-1 text-center">
+                <span>Do you have an account? <a href="/Account/DangNhap">Login</a></span>
+            </div>
+            @*</form>*@
+        }
+    </div>
+    <script>
+@if (TempData["SignSuccess"] != null && (bool)TempData["SignSuccess"])
+{
+    <text>
+        // Hiển thị SweetAlert2 sau khi đăng nhập thành công
+        Swal.fire({
+        title: 'Đăng Ký thành công!',
+        icon: 'success',
+        showConfirmButton: false,
+        timer: 1500
+        }).then(function () {
+        // Chuyển hướng sau khi SweetAlert hoàn tất
+        window.location.href = '@Url.Action("AConfirmEmail", "Account")';
+        });
+    </text>;
+}
+
+@if (TempData["ErrorMessage"] != null)
+{
+    <text>
+        // Hiển thị SweetAlert2 khi đăng nhập thất bại
+        Swal.fire({
+         title: 'Đăng Ký thất bại!',
+        icon: 'error',
+        showConfirmButton: false,
+        timer: 1500
+        });
+    </text>;
+}
+@if (TempData["ErrorMessageSignup"] != null)
+{
+    <text>
+        // Hiển thị SweetAlert2 khi đăng nhập thất bại
+        Swal.fire({
+         title: 'Tên đăng nhập đã tồn tại',
+        icon: 'error',
+        showConfirmButton: false,
+        timer: 1500
+        });
+    </text>;
+}
+
+
+
+    </script>
+    <script src="script copy.js"></script>
+</body>
+</html>

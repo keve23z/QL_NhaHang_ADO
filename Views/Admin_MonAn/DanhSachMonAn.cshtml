@@ -1,0 +1,188 @@
+﻿@model IEnumerable<QL_NhaHang_ADO.Models.MonAn>
+
+@{
+    ViewBag.Title = "DanhSachMonAn";
+    Layout = "~/Views/Share/layuot_admin.cshtml";
+}
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<form method="post" action="@Url.Action("XuLyForm", "Admin_MonAn")" autocomplete="off">
+    <div class="container mt-4">
+        <div class="row">
+            <!-- Cột đầu tiên -->
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <label for="MaMonAn" class="form-label">Mã món ăn:</label>
+                    <input type="text" class="form-control" id="MaMonAn" name="MaMonAn">
+                </div>
+                <div class="mb-3">
+                    <label for="TenMon" class="form-label">Tên món ăn:</label>
+                    <input type="text" class="form-control" id="TenMon" name="TenMon">
+                </div>
+                <div class="mb-3">
+                    <label for="Gia" class="form-label">Giá:</label>
+                    <input type="text" class="form-control" id="Gia" name="Gia">
+                </div>
+            </div>
+
+            <!-- Cột thứ hai -->
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <label for="LoaiMon" class="form-label">Loại món ăn:</label>
+                    <input type="text" class="form-control" id="LoaiMon" name="LoaiMon">
+                </div>
+                <div class="mb-3">
+                    <label for="AnhMon" class="form-label">Ảnh:</label>
+                    <input type="file" class="form-control" id="AnhMon" name="AnhMon" accept="Images/MonAn/*">
+                    <input type="hidden" id="TenAnh" name="TenAnh">
+                    <img id="imgPreview" src="" alt="Ảnh món ăn" class="img-thumbnail mt-2" style="width: 100px; height: auto;">
+                </div>
+            </div>
+
+            <!-- Cột thứ ba -->
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <label for="MoTa" class="form-label">Mô tả món ăn:</label>
+                    <textarea class="form-control" id="MoTa" name="MoTa" rows="8"></textarea>
+                </div>
+                <div class="d-flex justify-content-between">
+                    <button type="submit" class="btn btn-primary" name="action" value="Them">Thêm Món Ăn</button>
+                    <button type="submit" class="btn btn-danger" name="action" value="Xoa">Xóa Món Ăn</button>
+                    <button type="submit" class="btn btn-warning" name="action" value="Sua">Sửa Món Ăn</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+@using (Html.BeginForm("DanhSachMonAn", "Admin_MonAn", FormMethod.Get))
+{
+    <div class="input-group mt-3">
+        <input type="text" class="form-control" name="TenMonCanTim" placeholder="Nhập tên món ăn để tìm kiếm" value="@Request.QueryString["TimTenMon"]">
+        <button type="submit" class="btn btn-primary">Tìm kiếm</button>
+    </div>
+}
+
+<table class="table mt-4">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.MaMonAn)</th>
+            <th>@Html.DisplayNameFor(model => model.TenMon)</th>
+            <th>@Html.DisplayNameFor(model => model.LoaiMon)</th>
+            <th>@Html.DisplayNameFor(model => model.Gia)</th>
+            <th>@Html.DisplayNameFor(model => model.AnhMon)</th>
+            <th>@Html.DisplayNameFor(Model => Model.MoTa)</th>
+            <th>Hành động</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.MaMonAn)</td>
+                <td>@Html.DisplayFor(modelItem => item.TenMon)</td>
+                <td>@Html.DisplayFor(modelItem => item.LoaiMon)</td>
+                <td>@Html.DisplayFor(modelItem => item.Gia)</td>
+                <td>
+                    <img src="~/Images/MonAn/@item.AnhMon" alt="Ảnh món ăn" class="img-thumbnail" style="width: 100px;">
+                </td>
+                <td class="description-text">@Html.DisplayFor(modelItem => item.MoTa)</td>
+                <td>
+                    <a href="#" class="edit-link btn btn-sm btn-secondary"
+                       data-id="@item.MaMonAn"
+                       data-tenmon="@item.TenMon"
+                       data-loaimon="@item.LoaiMon"
+                       data-gia="@item.Gia"
+                       data-anhmon="@item.AnhMon"
+                       data-mota="@item.MoTa">
+                        Edit
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<style>
+
+    .description-text {
+        max-width: 200px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const form = document.querySelector('form');
+        const editLinks = document.querySelectorAll('.edit-link');
+        const anhMonInput = document.getElementById('AnhMon');
+        const tenAnhInput = document.getElementById('TenAnh');
+        const imgPreview = document.getElementById('imgPreview');
+
+        anhMonInput.addEventListener('change', function () {
+            const file = this.files[0];
+            const fileName = file?.name || '';
+            tenAnhInput.value = fileName;
+
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    imgPreview.src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        editLinks.forEach(link => {
+            link.addEventListener('click', function (event) {
+                event.preventDefault();
+                const maMonAn = this.dataset.id;
+                const tenMon = this.dataset.tenmon;
+                const loaiMon = this.dataset.loaimon;
+                const gia = this.dataset.gia;
+                const anhMon = this.dataset.anhmon;
+                const moTa = this.dataset.mota;
+
+                document.getElementById('MaMonAn').value = maMonAn;
+                document.getElementById('TenMon').value = tenMon;
+                document.getElementById('LoaiMon').value = loaiMon;
+                document.getElementById('Gia').value = gia;
+                document.getElementById('MoTa').value = moTa;
+                tenAnhInput.value = anhMon;
+                anhMonInput.value = '';
+                imgPreview.src = `/Images/MonAn/${anhMon}`;
+            });
+        });
+
+        form.addEventListener('submit', function (event) {
+            event.preventDefault();
+            const action = event.submitter.value;
+            let message = '';
+
+            switch (action) {
+                case 'Them': message = 'Bạn có chắc chắn muốn thêm món ăn này?'; break;
+                case 'Xoa': message = 'Bạn có chắc chắn muốn xóa món ăn này?'; break;
+                case 'Sua': message = 'Bạn có chắc chắn muốn sửa món ăn này?'; break;
+            }
+
+            Swal.fire({
+                title: 'Xác nhận',
+                text: message,
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonText: 'Đồng ý',
+                cancelButtonText: 'Hủy bỏ'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    const actionInput = document.createElement('input');
+                    actionInput.type = 'hidden';
+                    actionInput.name = 'action';
+                    actionInput.value = action;
+                    form.appendChild(actionInput);
+                    form.submit();
+                }
+            });
+        });
+    });
+</script>

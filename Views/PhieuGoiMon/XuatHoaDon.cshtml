@@ -1,0 +1,125 @@
+﻿
+
+@{
+    ViewBag.Title = "Xuất Hóa Đơn";
+    Layout = "~/Views/Share/layuot_admin.cshtml";
+}
+
+<div class="container my-5">
+    <div class="row">
+        <!-- Thông tin khách hàng và bàn -->
+        <div class="col-md-6 mb-4">
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">Thông Tin Khách Hàng</h5>
+                </div>
+                <div class="card-body">
+                    <p><strong>Mã Khách Hàng:</strong> @ViewBag.view.HoaDon.MaKH</p>
+                    <p><strong>Tên Khách Hàng:</strong> @ViewBag.kh.HoTen</p>
+                    <p><strong>SDT Khách Hàng:</strong> @ViewBag.kh.SoDT</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 mb-4">
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">Thông Tin Thêm</h5>
+                </div>
+                <div class="card-body">
+                    <p><strong>Mã Bàn:</strong> @ViewBag.view.HoaDon.MaBan</p>
+                    <p><strong>Mã Nhân Viên: </strong>@Session["MaNV"]</p>
+                    <p><strong>Tên Nhân Viên: </strong>@Session["HoTen"]</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Thông tin hóa đơn -->
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <div class="card shadow-sm">
+                <div class="card-header bg-secondary text-white">
+                    <h5 class="mb-0">Thông Tin Hóa Đơn</h5>
+                </div>
+                <div class="card-body">
+                    <p><strong>Mã Hóa Đơn:</strong> @ViewBag.view.HoaDon.Ma</p>
+                    <p><strong>Hình thức thanh toán:</strong> @ViewBag.view.HoaDon.HinhThuc</p>
+                    <p><strong>Thời gian lập:</strong>@ViewBag.TG</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card shadow-sm text-end">
+                <div class="card-header bg-secondary text-white">
+                    <h5 class="mb-0">Tổng Thanh Toán</h5>
+                </div>
+                <div class="card-body">
+                    <p><strong>Tổng Tiền:</strong> @String.Format("{0:0,0}", ViewBag.view.TongTien) VNĐ</p>
+                    <p><strong>Mã giảm giá:</strong>@ViewBag.MaGG</p>
+                    <p><strong>Giảm Giá:</strong> @String.Format("{0:0,0}", ViewBag.view.SoTienSauGiamGia) VNĐ</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Chi tiết hóa đơn -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card shadow-sm">
+                <div class="card-header bg-dark text-white">
+                    <h5 class="mb-0">Chi Tiết Hóa Đơn</h5>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-bordered">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th>Tên Món</th>
+                                    <th>Số Lượng</th>
+                                    <th>Đơn Giá</th>
+                                    <th>Thành Tiền</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var cthd in ViewBag.listM)
+                                {
+                                    <tr>
+                                        <td>@cthd.TenMon</td>
+                                        <td>@cthd.SoLuong</td>
+                                        <td>@String.Format("{0:0,0}", cthd.GiaMon) VNĐ</td>
+                                        <td>@String.Format("{0:0,0}", cthd.ThanhTien) VNĐ</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Nút chức năng -->
+    <div class="row mt-4">
+        <div class="col-12 text-end">
+            <form method="post" action="@Url.Action("ThanhToan", "PhieuGoiMon")">
+                <input type="hidden" name="MaHD" value="@ViewBag.view.HoaDon.Ma" />
+                <input type="hidden" name="MaBan" value="@ViewBag.view.HoaDon.MaBan" />
+                <input type="hidden" name="MaKH" value="@ViewBag.view.HoaDon.MaKH" />
+                <input type="hidden" name="MaNV" value="@Session["MaNV"]" />
+                <input type="hidden" name="TongTien" value="@ViewBag.view.TongTien" />
+                <input type="hidden" name="MaGG" value="@ViewBag.MaGG" />
+                <input type="hidden" name="HinhThuc" value="@ViewBag.view.HoaDon.HinhThuc" />
+                <input type="hidden" name="ThoiGian" value="@ViewBag.TG" />
+                <input type="hidden" name="GiaGiam" value="@ViewBag.view.SoTienSauGiamGia" />
+                @foreach (var cthd in ViewBag.listM)
+                {
+                    <input type="hidden" name="MaMonAn[]" value="@cthd.MaMA" />
+                    <input type="hidden" name="SoLuong[]" value="@cthd.SoLuong" />
+                    <input type="hidden" name="ThanhTien[]" value="@cthd.ThanhTien" />
+                }
+                <input type="hidden" name="MaPh" value="@ViewBag.MaP" />
+                <button type="submit" class="btn btn-success btn-lg shadow-sm rounded-pill hover-effect">Thanh Toán</button>
+            </form>
+        </div>
+    </div>
+</div>

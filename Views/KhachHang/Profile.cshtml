@@ -1,0 +1,230 @@
+﻿
+
+@*<h2>Thông tin khách hàng</h2>
+<div>
+    <p><strong>Họ tên:</strong> @ViewBag.HoTen</p>
+    <p><strong>Ngày sinh:</strong> @Convert.ToDateTime(ViewBag.NgaySinh).ToString("dd-MM-yyyy")</p>
+    <p><strong>Số điện thoại:</strong> @ViewBag.SoDT</p>
+    <p><strong>Điểm thành viên:</strong> @ViewBag.DiemThanhVien</p>
+    <p>@ViewBag.Avatar</p>
+</div>*@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+
+<!-- Mirrored from www.bootstrapget.com/demos/templatemonster/adminlite-bootstrap-admin-panel/profile.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 25 Nov 2024 15:57:21 GMT -->
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Bootstrap Gallery - Adminlite Dashboard Template</title>
+
+    <!-- Meta -->
+    <meta name="description" content="Marketplace for Bootstrap Admin Dashboards" />
+    <meta name="author" content="Bootstrap Gallery" />
+    <link rel="canonical" href="https://www.bootstrap.gallery/">
+    <meta property="og:url" content="https://www.bootstrap.gallery/">
+    <meta property="og:title" content="Admin Templates - Dashboard Templates | Bootstrap Gallery">
+    <meta property="og:description" content="Marketplace for Bootstrap Admin Dashboards">
+    <meta property="og:type" content="Website">
+    <meta property="og:site_name" content="Bootstrap Gallery">
+    <link rel="shortcut icon" href="/assets_admin/images/favicon.svg" />
+
+    <!-- *************
+            ************ CSS Files *************
+        ************* -->
+    <link rel="stylesheet" href="/assets_admin/fonts/bootstrap/bootstrap-icons.css" />
+    <link rel="stylesheet" href="/assets_admin/css/main.min.css" />
+
+    <!-- *************
+            ************ Vendor Css Files *************
+        ************ -->
+    <!-- Scrollbar CSS -->
+    <link rel="stylesheet" href="/assets_admin/vendor/overlay-scroll/OverlayScrollbars.min.css" />
+</head>
+
+<body>
+    <div class="app-body" style="overflow:unset">
+
+        <!-- Required jQuery first, then Bootstrap Bundle JS -->
+        <script src="/assets_admin/js/jquery.min.js"></script>
+        <script src="/assets_admin/js/bootstrap.bundle.min.js"></script>
+        <script src="/assets_admin/js/moment.min.js"></script>
+
+        <!-- *************
+        ************ Vendor Js Files *************
+    ************* -->
+        <!-- Overlay Scroll JS -->
+        <script src="/assets_admin/vendor/overlay-scroll/jquery.overlayScrollbars.min.js"></script>
+        <script src="/assets_admin/vendor/overlay-scroll/custom-scrollbar.js"></script>
+
+        <!-- Apex Charts -->
+        <script src="/assets_admin/vendor/apex/apexcharts.min.js"></script>
+        <script src="/assets_admin/vendor/apex/custom/profile/income.js"></script>
+
+        <!-- Custom JS files -->
+        <script src="/assets_admin/js/custom.js"></script>
+        <!-- Stats BG starts -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        @if (@ViewBag.MaKH == null && Session["MaTaiKhoan"] != null)
+        {
+            <div>
+                @Html.Action("NhapThongTinKhachHang", "KhachHang")
+            </div>
+            <script>
+window.location.href = '@Url.Action("NhapThongTinKhachHang", "KhachHang")';
+            </script>
+        }
+        @*@if (@ViewBag.MaKH == null)
+                {
+                    <div>
+                        @Html.Action("Welcome", "Account")
+                    </div>
+                    <script>
+        window.location.href = '@Url.Action("Welcome", "Account")';
+                    </script>
+                }*@
+        else
+        {
+            <div class="mx-n4 mb-4 p-4 bg-primary">
+
+                <div class="d-flex align-items-center flex-row flex-wrap">
+                    <img style="object-fit:cover" src="@Url.Content("/Images/Avatar/" + @ViewBag.Avatar)" class="img-5x rounded-circle" alt="AdminLite Admin Template" />
+                    <div class="ms-3 text-white">
+                        <h5 class="mb-1">@ViewBag.HoTen</h5>
+                        <h6 class="m-0 fw-light">Mã khách hàng: @ViewBag.MaKH</h6>
+                    </div>
+                    <div class="d-flex justify-content-end align-items-center mt-3">
+                        @if (ViewBag.Cart == null)
+                        {
+                            ViewBag.Cart = 0;
+                        }
+                        <a href="@Url.Action("Welcome", "Account", new { id = -1, cart = ViewBag.Cart })" class="btn btn-link text-decoration-none mr-3">
+                            Trở lại
+                        </a>
+                        <a href="/Account/Logout" class="btn btn-danger">
+                            Đăng xuất
+                        </a>
+                    </div>
+
+
+                </div>
+
+            </div>
+            <!-- Stats BG ends -->
+            <!-- Row starts -->
+            <div class="row gx-4">
+                <div class="col-xl-3 col-sm-6 col-12">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <div class="d-flex mb-2">
+                                <div class="icon-box md bg-primary rounded-5 me-3">
+                                    <i style="color:white" class="fa-solid fa-cake-candles fa-bounce"></i>
+                                </div>
+                                <div class="d-flex flex-column">
+                                    <h2 class="m-0 lh-1">@Convert.ToDateTime(ViewBag.NgaySinh).ToString("dd-MM-yyyy")</h2>
+                                    <p class="m-0 opacity-50">Ngày Sinh</p>
+                                </div>
+                            </div>
+                            <div class="m-0">
+                                <div class="progress thin mb-2">
+                                    <div class="progress-bar bg-primary" role="progressbar" style="width: 100%" aria-valuenow="75"
+                                         aria-valuemin="0" aria-valuemax="100"></div>
+
+                                </div>
+                                @*<p class="m-0 small fw-light opacity-75">Higher than last week.</p>*@
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-sm-6 col-12">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <div class="d-flex mb-2">
+                                <div class="icon-box md bg-primary rounded-5 me-3">
+                                    <i style="color:white" class="fa-solid fa-phone fa-shake"></i>
+                                </div>
+                                <div class="d-flex flex-column">
+                                    <h2 class="m-0 lh-1">@ViewBag.SoDT</h2>
+                                    <p class="m-0 opacity-50">Số Điện Thoại</p>
+                                </div>
+                            </div>
+                            <div class="m-0">
+                                <div class="progress thin mb-2">
+                                    <div class="progress-bar bg-primary" role="progressbar" style="width: 100%" aria-valuenow="75"
+                                         aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-sm-6 col-12">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <div class="d-flex mb-2">
+                                <div class="icon-box md bg-primary rounded-5 me-3">
+                                    <i style="color:white" class="fa-solid fa-envelope fa-beat"></i>
+                                </div>
+                                <div class="d-flex flex-column">
+                                    <h7 style="font-weight:bold" class="m-0 lh-1">@ViewBag.Mail</h7>
+                                    <p class="m-0 opacity-50">Email</p>
+                                </div>
+                            </div>
+                            <div class="m-0">
+                                <div class="progress thin mb-2">
+                                    <div class="progress-bar bg-primary" role="progressbar" style="width: 100%" aria-valuenow="75"
+                                         aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-sm-6 col-12">
+                    <div class="card mb-4 card-bg">
+                        <a href="@Url.Action("DoiMaGiamGia", "KhachHang")">
+                            <div style="background-color: #fe8d25; overflow: hidden; border-radius: 9px" class="card-body text-white">
+                                <div class="d-flex mb-2">
+                                    <div class="icon-box md bg-white rounded-5 me-3">
+                                        <i style="color: #fe8d25;" class="fa-solid fa-wallet"></i>
+                                    </div>
+                                    <div class="d-flex flex-column">
+                                        <h2 class="m-0 lh-1">@ViewBag.DiemThanhVien</h2>
+                                        <p class="m-0 opacity-50">Điểm Thành Viên</p>
+                                    </div>
+                                </div>
+                                <div class="m-0">
+                                    <div class="progress thin mb-2">
+                                        <div class="progress-bar bg-white" role="progressbar" style="width: 75%" aria-valuenow="75"
+                                             aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+            <!-- Row ends -->
+            <!-- Row starts -->
+            <div class="row gx-4">
+
+
+            </div>
+            <!-- Row ends -->
+            <!-- Row starts -->
+            <div class="row gx-4">
+
+
+            </div>
+            <!-- Row ends -->
+
+        }
+        @if(Session["MaKH"] != null){
+            @Html.Action("lichSuDonHang", "KhachHang")
+        }
+</body>
+</html>

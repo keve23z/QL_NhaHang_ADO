@@ -1,0 +1,120 @@
+﻿@model List<QL_NhaHang_ADO.Models.ChiTietPhieuGoiMon>
+@{
+    ViewBag.Title = "Danh Sách Phiếu Gọi Món";
+    Layout = "~/Views/Share/layuot_admin.cshtml";
+}
+
+<form method="post" action="@Url.Action("XuatHoaDon", "PhieuGoiMon")">
+    <div class="container mt-5">
+        <h2 class="mb-4 text-center text-primary">Chi Tiết Phiếu Gọi Món</h2>
+        <!-- Thông tin Mã Phiếu và Mã Bàn -->
+        <div class="row mb-4">
+            <div class="col-md-6">
+                <p><strong>Mã Phiếu:</strong> @ViewBag.MaPGM</p>
+                <input type="hidden" name="MaPhieu" value="@ViewBag.MaPGM" />
+            </div>
+            <div class="col-md-6 text-md-end">
+                <p><strong>Mã Bàn:</strong> @ViewBag.MaBan</p>
+                <input type="hidden" name="MaBan" value="@ViewBag.MaBan" />
+            </div>
+        </div>
+
+        <!-- Các tùy chọn thanh toán -->
+        <div class="row mb-3">
+            <div class="col-md-4">
+                <label class="form-label"><strong>Hình Thức Thanh Toán:</strong></label>
+                <select name="PhuongThuc" class="form-select">
+                    <option>Tiền mặt</option>
+                    <option>Chuyển Khoản</option>
+                    <option>Thẻ</option>
+                </select>
+            </div>
+            <div class="col-md-4">
+                <label class="form-label"><strong>SDT Khách hàng:</strong></label>
+                <input type="text" name="SDT_Khach" class="form-control" placeholder="Nhập số điện thoại khách" />
+            </div>
+            <div class="col-md-4">
+                <label class="form-label"><strong>Mã Giảm Giá:</strong></label>
+                <input type="text" name="MaGiamGia" class="form-control" placeholder="Nhập mã giảm giá" />
+            </div>
+        </div>
+
+        <!-- Danh sách chi tiết món ăn dưới dạng list -->
+        <div class="container">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th class="text-center">Tên Món</th>
+                        <th class="text-center">Mã Món Ăn</th>
+                        <th class="text-center">Số Lượng</th>
+                        <th class="text-center">Đơn Giá</th>
+                        <th class="text-center">Thành Tiền</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in ViewBag.dsMonAn)
+                    {
+                        <tr>
+                            <td class="text-center">@item.TenMon</td>
+                            <td class="text-center">@item.MaMonAn</td>
+                            <td class="text-center">@item.SoLuong</td>
+                            <td class="text-center">@String.Format("{0:0}", item.DonGia) VNĐ</td>
+                            <td class="text-center">@String.Format("{0:0}", item.ThanhTien) VNĐ</td>
+                        </tr>
+                        <!-- input ẩn danh sách mã món ăn và số lượng -->
+                        <input type="hidden" name="MaMonAn[]" value="@item.MaMonAn" />
+                        <input type="hidden" name="SoLuong[]" value="@item.SoLuong" />
+                    }
+                </tbody>
+            </table>
+        </div>
+
+
+
+
+        <!-- Hiển thị tổng hóa đơn -->
+        <div class="d-flex justify-content-between align-items-center mt-4">
+            <h4 class="fw-bold">Tổng Hóa Đơn: @String.Format("{0:0}", ViewBag.TongHoaDon) VNĐ</h4>
+            <input type="hidden" name="Tong" value="@ViewBag.TongHoaDon" />
+            <button type="submit" class="btn btn-primary btn-lg shadow-sm rounded-pill">
+                Xuất Hóa Đơn
+            </button>
+        </div>
+    </div>
+</form>
+
+<!-- FontAwesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<script>
+    function validateDiscountCode() {
+        var discountCode = $('#MaGiamGia').val();
+        $.ajax({
+            url: '/GioHang/KiemTraMa',
+            type: 'POST',
+            data: { discountCode: discountCode },
+            success: function (response) {
+                // nếu mã không hợp lệ ô thành màu đỏ
+                if (response === 'Mã giảm giá không hợp lệ') {
+                    $('#discount-message').text(response);
+                    $('#discount-message').css('color', 'red');
+                } else {
+                    $('#discount-message').text(response);
+                    $('#discount-message').css('color', 'green');
+                }
+            },
+            error: function (error) {
+                console.log('Error:', error);
+            }
+        });
+    }
+
+    // Kiểm tra mã giảm giá trước khi submit form
+    $("#cart-form").submit(function (e) {
+        var discountCode = $('#MaGiamGia').val();
+
+        // Nếu mã giảm giá trống hoặc không hợp lệ, gán giá trị là "No"
+        if (discountCode.trim() === "" || $('#discount-message').text() === 'Mã giảm giá không hợp lệ') {
+            $('#MaGiamGia').val('No');
+        }
+    });
+</script>

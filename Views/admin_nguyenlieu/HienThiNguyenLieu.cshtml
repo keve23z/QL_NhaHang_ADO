@@ -1,0 +1,59 @@
+﻿@model IEnumerable<QL_NhaHang_ADO.Models.NguyenLieu>
+
+@{
+    ViewBag.Title = "Danh Sách Nguyên Liệu";
+    Layout = "~/Views/Share/layuot_admin.cshtml";
+}
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center">
+        <h2 class="text-primary">Nguyên Liệu</h2>
+    </div>
+
+    <div class="table-responsive mt-3">
+        <table class="table table-hover table-bordered">
+            <thead class="bg-primary text-white">
+                <tr>
+                    <th>Mã Nguyên Liệu</th>
+                    <th>Số Lượng Tồn</th>
+                    <th>Tên Nguyên Liệu</th>
+                    <th>Đơn Giá</th>
+                    <th>Đơn Vị Tính</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (!Model.Any())
+                {
+                    <tr>
+                        <td colspan="5" class="text-center" style="border: 1px solid #dee2e6;">Không có nguyên liệu nào!</td>
+                    </tr>
+                }
+                else
+                {
+                    foreach (var item in Model)
+                    {
+                        <tr>
+                            <td style="border: 1px solid #dee2e6;">@item.MaNguyenLieu</td>
+                            <td style="border: 1px solid #dee2e6;">@item.SoLuongTon</td>
+                            <td style="border: 1px solid #dee2e6;">@item.TenNguyenLieu</td>
+                            <td style="border: 1px solid #dee2e6;">@String.Format("{0:N0}", item.DonGia)</td>
+                            <td style="border: 1px solid #dee2e6;">@item.DVT</td>
+                        </tr>
+                    }
+                }
+            </tbody>
+
+        </table>
+    </div>
+</div>
+
+<style>
+    .btn {
+        font-size: 14px;
+    }
+
+    .table th, .table td {
+        vertical-align: middle;
+        text-align: center;
+    }
+</style>

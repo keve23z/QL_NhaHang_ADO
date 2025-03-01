@@ -1,0 +1,103 @@
+﻿@model IEnumerable<QL_NhaHang_ADO.Models.Ban>
+
+@{
+    ViewBag.Title = "ShowBan";
+    Layout = "~/Views/Share/layuot_admin.cshtml";
+}
+<div class="container mt-4">
+    <h2 class="text-center mb-4" style="color: #f49030">Danh Sách Bàn</h2>
+    @using (Html.BeginForm("ShowBan", "QuanLyBan", FormMethod.Get))
+    {
+        <div class="row align-items-center mb-3">
+            <!-- Bộ lọc loại bàn -->
+            <div class="col-md-4">
+                <label for="LocTheoSl" class="form-label">Loại bàn</label>
+                <select id="LocTheoSl" name="LocTheoSl" class="form-select">
+                    <option value="0">Chọn loại bàn</option>
+                    <option value="1">2 chỗ</option>
+                    <option value="2">4 chỗ</option>
+                    <option value="3">4+ chỗ</option>
+                </select>
+            </div>
+
+            <!-- Bộ lọc trạng thái -->
+            <div class="col-md-4">
+                <label for="LocBanTrong" class="form-label">Trạng thái</label>
+                <select id="LocBanTrong" name="LocBanTrong" class="form-select">
+                    <option value="0">Chọn trạng thái</option>
+                    <option value="1">Bàn trống</option>
+                    <option value="2">Bàn đầy</option>
+                </select>
+            </div>
+
+            <!-- Nút lọc -->
+            <div class="col-md-4 d-flex align-items-end">
+                <button type="submit" class="btn btn-primary w-100">
+                    <i class="fas fa-filter"></i> Lọc
+                </button>
+            </div>
+        </div>
+    }
+
+    <!-- Hiển thị thông báo thành công hoặc thất bại -->
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success" role="alert">
+            @TempData["SuccessMessage"]
+        </div>
+    }
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger" role="alert">
+            @TempData["ErrorMessage"]
+        </div>
+    }
+
+    <!-- Bảng hiển thị danh sách bàn -->
+    <div class="table-responsive">
+        <table class="table table-hover table-bordered text-center">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Mã Bàn</th>
+                    <th>Sức Chứa</th>
+                    <th>Trạng Thái</th>
+                    <th>Hành Động</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model != null && Model.Any())
+                {
+                    foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@Html.DisplayFor(modelItem => item.MaBan)</td>
+                            <td>@Html.DisplayFor(modelItem => item.SucChua)</td>
+                            <td>@Html.DisplayFor(modelItem => item.TrangThai)</td>
+                            <td>
+                                @if (item.TrangThai == "Trống")
+                                {
+                                    @Html.ActionLink("Đặt Bàn", "ChangeTrangThai", new { maBan = item.MaBan, newTrangThai = "Đầy" }, new { @class = "btn btn-success btn-sm" })
+                                }
+                                else if (item.TrangThai == "Đầy")
+                                {
+                                    @Html.ActionLink("Hủy Đặt", "ChangeTrangThai", new { maBan = item.MaBan, newTrangThai = "Trống" }, new { @class = "btn btn-warning btn-sm" })
+                                }
+                                @*@Html.ActionLink("Chỉnh Sửa", "Edit", new { id = item.MaBan }, new { @class = "btn btn-primary btn-sm" }) |
+                                    @Html.ActionLink("Chi Tiết", "Details", new { id = item.MaBan }, new { @class = "btn btn-info btn-sm" }) |
+                                    @Html.ActionLink("Xóa", "Delete", new { id = item.MaBan }, new { @class = "btn btn-danger btn-sm", onclick = "return confirm('Bạn có chắc muốn xóa bàn này?');" })*@
+                            </td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="3" class="text-center text-muted">Không có bàn nào được tìm thấy.</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+

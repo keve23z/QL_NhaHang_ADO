@@ -1,0 +1,51 @@
+﻿
+
+
+@model QL_NhaHang_ADO.Models.MaGiamGia
+
+@{
+    ViewBag.Title = "TaoMaGiamGia";
+    Layout = "~/Views/Share/layuot_admin.cshtml";
+}
+
+<h2>Tạo Mã Giảm Giá</h2>
+
+<!-- Hiển thị thông báo thành công -->
+@if (TempData["SignSuccess"] != null)
+{
+    <div class="alert alert-success">
+        Mã giảm giá đã được tạo thành công!
+    </div>
+}
+
+<!-- Form nhập thông tin mã giảm giá -->
+@using (Html.BeginForm("TaoMaGiamGia", "Admin_GiamGia", FormMethod.Post))
+{
+    <div class="form-group">
+        <label for="NgayBD">Ngày Bắt Đầu</label>
+        @Html.TextBoxFor(model => model.NgayBD, new { @class = "form-control", type = "date" })
+        @Html.ValidationMessageFor(model => model.NgayBD, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        <label for="NgayKT">Ngày Kết Thúc</label>
+        @Html.TextBoxFor(model => model.NgayKT, new { @class = "form-control", type = "date" })
+        @Html.ValidationMessageFor(model => model.NgayKT, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        <label for="SoLuong">Số Lượng</label>
+        @Html.TextBoxFor(model => model.SoLuong, new { @class = "form-control", type = "number", min = "1" })
+        @Html.ValidationMessageFor(model => model.SoLuong, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        <label for="SoTien">Số Tiền Giảm</label>
+        @Html.TextBoxFor(model => model.SoTien, new { @class = "form-control", type = "number", min = "0" })
+        @Html.ValidationMessageFor(model => model.SoTien, "", new { @class = "text-danger" })
+    </div>
+    <br />
+    <button type="submit" class="btn btn-primary">Tạo Mã Giảm Giá</button>
+}
+
+

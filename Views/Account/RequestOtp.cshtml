@@ -1,0 +1,221 @@
+﻿@model QL_NhaHang_ADO.Models.TaiKhoan
+@{
+    ViewBag.Title = "Request OTP";
+}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="reset.css" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+          integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+          crossorigin="anonymous"
+          referrerpolicy="no-referrer" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            font-size: 62.5%;
+        }
+
+        body {
+            font-size: 1.6rem;
+            font-family: "Roboto", sans-serif;
+        }
+
+        header {
+            background-image: url("/images/bg5.jpg");
+            color: white;
+            display: flex;
+            min-height: calc(100vh - 10rem);
+            background-size: cover;
+            background-position: center center;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+            header .content {
+                margin: auto;
+                font-size: 2rem;
+            }
+
+                header .content h1 {
+                    font-size: 3rem;
+                    margin-bottom: 3rem;
+                    font-weight: bold;
+                    color: #00c2ff;
+                }
+
+                header .content p {
+                    margin-bottom: 2rem;
+                }
+
+        a {
+            text-decoration: none;
+            color: white;
+        }
+
+        .container {
+            margin: 0 auto;
+            max-width: 100%;
+            width: 100rem;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            padding: 1rem;
+            align-items: baseline;
+        }
+
+            nav ul {
+                display: flex;
+                list-style-type: none;
+                padding: 0;
+            }
+
+            nav .logo {
+                font-size: 3rem;
+            }
+
+            nav li a {
+                padding: 1rem;
+            }
+
+        .selected {
+            font-weight: bold;
+        }
+
+        .highlight {
+            background-color: #00c2ff;
+            padding: 1rem;
+        }
+
+        footer {
+            height: 10rem;
+            background-color: #000;
+            color: #fff;
+            padding: 1rem;
+        }
+
+            footer ul {
+                display: flex;
+                list-style-type: none;
+                align-items: center;
+                justify-content: space-between;
+                padding: 0;
+            }
+
+            footer strong {
+                color: #00c2ff;
+                line-height: 2;
+            }
+
+        ul, li {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        .form-control {
+            border-radius: 50px;
+            padding: 10px 15px;
+            border: none;
+            box-shadow: 0 0 8px gray;
+        }
+
+        .btn {
+            background-color: #00c3fd;
+            border: none;
+            padding: 5px 20px;
+            border-radius: 15px;
+            color: white;
+            font-weight: bold;
+        }
+
+        .swal2-popup {
+            font-size: 100%; /* Tăng kích thước chữ cho toàn bộ popup */
+        }
+        /*# sourceMappingURL=style.css.map */
+    </style>
+</head>
+<body @*style="overflow:hidden;"*@>
+    <header>
+        <nav class="container" style="display: flex; align-items: center">
+            
+
+            <ul>
+                <li><a href="#" class="selected">Trang chủ</a></li>
+                <li><a href="#">Nổi bật</a></li>
+                <li><a href="#">Giá</a></li>
+                <li><a href="#">liên hệ</a></li>
+                <li><a href="#" class="highlight">Đặt bàn</a></li>
+            </ul>
+        </nav>
+        <div class="content">
+            <div class="container">
+                <h1>Thay đổi mật khẩu!</h1>
+                <p>Nhập email đã đăng ký để nhận mã OTP</p>
+                @using (Html.BeginForm("RequestOTP", "Account", FormMethod.Post))
+                {
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Nhập địa chỉ email:</label>
+                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "Nhập email của bạn", id = "email" })
+                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Yêu cầu mã OTP</button>
+                }
+            </div>
+        </div>
+    </header>
+
+    <footer>
+        <ul class="container">
+            <li>
+                <strong>Địa Chỉ</strong>
+                <p>140 Lê Trọng Tấn</p>
+            </li>
+            <li>
+                <strong>Điện Thoại</strong>
+                <p>+84 040 400 400</p>
+            </li>
+            <li>
+                <strong>Email</strong>
+                <p>chaytue0203@gmail.com</p>
+            </li>
+        </ul>
+    </footer>
+    <script>
+   @if (TempData["ErrorMessage"] != null)
+   {
+    <text>
+        // Hiển thị SweetAlert2 sau khi đăng nhập thành công
+        Swal.fire({
+        title: 'Email không tồn tại!',
+        icon: 'error',
+        showConfirmButton: false,
+        timer: 1500
+        })
+        // Chuyển hướng sau khi SweetAlert hoàn tất
+    </text>;
+   }
+    </script>
+</body>
+</html>
+
+
+

@@ -1,0 +1,473 @@
+﻿
+@{
+    ViewBag.Title = "Welcome";
+    Layout = "~/Views/Share/layout_user.cshtml";
+}
+
+<!doctype html>
+<html lang="zxx">
+
+
+<!-- Mirrored from barakahit.net/html/brulee/index-2.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 22 Nov 2024 05:59:06 GMT -->
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Title -->
+    <title>Chay Tuệ-Nhà hàng chay</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Italianno&amp;display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet">
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/assets/img/favicon.png">
+    <!-- Bootstrap Min CSS -->
+    <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+    <!-- Animate Min CSS -->
+    <link rel="stylesheet" href="/assets/css/animate.min.css">
+    <!-- Font Awesome Min CSS -->
+    <link rel="stylesheet" href="/assets/css/fontawesome.min.css">
+    <!-- Mean Menu CSS -->
+    <link rel="stylesheet" href="/assets/css/meanmenu.css">
+    <!-- Magnific Popup Min CSS -->
+    <link rel="stylesheet" href="/assets/css/magnific-popup.min.css">
+    <!-- Swiper Min CSS -->
+    <link rel="stylesheet" href="/assets/css/swiper.min.css">
+    <!-- Owl Carousel Min CSS -->
+    <link rel="stylesheet" href="/assets/css/owl.carousel.min.css">
+    <!-- jquery ui Min CSS -->
+    <link rel="stylesheet" href="/assets/css/jquery-ui.min.css">
+    <!-- Nice Select CSS -->
+    <link rel="stylesheet" href="/assets/css/nice-select.css">
+    <!-- Style CSS -->
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <!-- Responsive CSS -->
+    <link rel="stylesheet" href="/assets/css/responsive.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<style>
+    #box_aside {
+        z-index: 999999;
+        margin-top: -10px;
+        margin-left: -10px;
+    }
+
+    #box_aside {
+        background: #929292ba;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        z-index: 2020;
+        position: fixed;
+    }
+
+        #box_aside .giohang_index {
+            width: 500px;
+            height: 100%;
+            right: 0px;
+            position: absolute;
+            background: #fff;
+            z-index: 2002;
+            position: fixed;
+        }
+
+    .cart {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 150px;
+        height: 55px;
+        margin-left: 20px;
+        border: 1px solid #ff8d25;
+    }
+
+    .cart_icon {
+        font-size: 35px;
+        color: white;
+    }
+
+    .cart {
+        border-radius: 5px;
+        padding: 10px;
+        display: flex;
+        align-items: center;
+    }
+
+    .cart_icon {
+        font-size: 25px;
+        color: #ff8d25;
+    }
+
+    .cart-count {
+        width: 15px;
+        height: 25px;
+        color: #ff8d25;
+        position: relative;
+        z-index: 999;
+    }
+
+    .cart_text {
+        color: rgb(215, 202, 202);
+    }
+</style>
+<body>
+
+    <!-- End Navbar Area -->
+    <!-- Start Home Area -->
+    <div class="home-area">
+        <div class="d-table">
+            <div class="d-table-cell">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-lg-10 offset-lg-1 col-md-12">
+                            <div class="main-banner-content">
+                                <h4 class="custom-font">Chào Mừng Đến Với Chay Tuệ</h4>
+                                <h1>Thuần chay tịnh</h1>
+                                <p>Thanh lọc tâm hồn, dưỡng lành cơ thể.</p>
+                                <div class="banner-btn">
+                                    <a href="/MonAn/Menu" class="default-btn-one">Xem Mennu <span></span></a>
+                                    <a href="#0" class="default-btn">Đặt bàn Ngay<span></span></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Home Area -->
+    <!-- Start Features Section -->
+    <section class="features-section pt-70 pb-30">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6">
+                    <div class="single-features-item">
+                        <div class="features-icon">
+                            <img src="/assets/img/icons/features-icon-1.svg" alt="svg icon">
+                        </div>
+                        <h3>Chất lượng cao cấp</h3>
+                        <p>Nhà hàng mang đến trải nghiệm ẩm thực đẳng cấp với dịch vụ tận tình và món ăn tinh tế</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="single-features-item">
+                        <div class="features-icon">
+                            <img src="/assets/img/icons/features-icon-2.svg" alt="svg icon">
+                        </div>
+                        <h3>Nguyên liệu 100% thiên nhiên</h3>
+                        <p>Chúng tôi sử dụng 100% nguyên liệu tươi sạch, đảm bảo thơm ngon, an toàn và đầy chất dinh dưỡng.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="single-features-item">
+                        <div class="features-icon">
+                            <img src="/assets/img/icons/features-icon-3.svg" alt="svg icon">
+                        </div>
+                        <h3>Không gian thư giãn, sang trọng</h3>
+                        <p>Không gian yên bình, thiết kế tinh tế là nơi lý tưởng để bạn thư giãn tầm hồn bằng những món ăn thơn ngon.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End Features Section -->
+    <!-- Start Menu Two Section -->
+    <section class="menu-area-two pt-100 pb-70">
+        <div class="container">
+            <div class="row" style="flex-direction:column">
+                <div class="col-md-12">
+                    <div class="section-title">
+                        <h6 class="sub-title">Những lựa chọn tốt nhất</h6>
+                        <h2>Tại Chay Tuệ</h2>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6" style="max-width:100%">
+                    <div class="brulee-food-menu">
+                        <h3>Món Ăn</h3>
+                        @Html.Action("DanhSachMonAn", "MonAn")
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </section>
+    <!-- End Menu Section -->
+    <!-- Start Counter Section -->
+    <section class="counter-area section-padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-6 counter-item">
+                    <div class="single-counter">
+                        <div class="counter-contents">
+                            <h2>
+                                <span class="counter-number">1500</span>
+                                <span>+</span>
+                            </h2>
+                            <h3 class="counter-heading">Khách Hàng Hài Lòng</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 counter-item">
+                    <div class="single-counter">
+                        <div class="counter-contents">
+                            <h2>
+                                <span class="counter-number">20</span>
+                                <span>+</span>
+                            </h2>
+                            <h3 class="counter-heading">Món Ăn</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 counter-item">
+                    <div class="single-counter">
+                        <div class="counter-contents">
+                            <h2>
+                                <span class="counter-number">5</span>
+                            </h2>
+                            <h3 class="counter-heading">Năm Phục Vụ Các Món Chay</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 counter-item">
+                    <div class="single-counter">
+                        <div class="counter-contents">
+                            <h2>
+                                <span class="counter-number">80</span>
+                                <span>%</span>
+                            </h2>
+                            <h3 class="counter-heading">Khách hàng quay lại</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End Counter Section -->
+    <!-- Start Offer Section -->
+    <section class="offer-area section-padding">
+        <div class="container">
+            <div class="row d-flex align-items-center">
+                <div class="col-lg-6 col-md-12">
+                    <div class="offer-content">
+                        <h6 class="sub-title">Ưu Đãi Đặc Biệt</h6>
+                        <h2>Hương vị bạn sẽ nhớ mãi</h2>
+                        <p>Mì Ý chay (Spaghetti chay), được chế biến với nước sốt cà chua, đậu hũ trắng, và trang trí bằng lá húng quế tươi. Đây là một lựa chọn phổ biến trong các thực đơn chay, kết hợp hương vị thanh đạm và giàu dinh dưỡng.</p>
+                        <p>Món ăn này là lựa chọn hoàn hảo cho những ai yêu thích sự đơn giản, lành mạnh và muốn trải nghiệm phong cách ẩm thực chay hiện đại. Phù hợp cho các bữa ăn chính hoặc những dịp đặc biệt cùng gia đình và bạn bè.</p>
+                        <a href="/MonAn/Menu " class="default-btn">Menu<span></span></a>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-12">
+                    <div class="offer-img">
+                        <img src="/assets/img/offer.png" alt="">
+                        <div class="discount-img">
+                            <img src="/assets/img/discount.png" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div id="test" style="display:none">@ViewBag.CartCount</div>
+    @Html.Action("DatBan", "DatBan")
+    <!-- End Offer Section -->
+    <!-- Start Gallery Section -->
+    <section id="gallery" class="gallery-area bg-dark section-padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12">
+                    <div class="section-title">
+                        <h6 class="sub-title">Xem nhà hàng chúng tôi</h6>
+                        <h2>Chay Tuệ</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <!-- gallery-single-item -->
+                <div class="col-lg-4 col-md-6">
+                    <a class="gallery-single-item popup-img" href="/assets/img/gallery/Buddha-Chay.jpeg">
+                        <img style="width:275px; height:185px; object-fit:cover" src="/assets/img/gallery/Buddha-Chay.jpeg " alt="image">
+                    </a>
+                </div>
+                <!-- gallery-single-item -->
+                <div class="col-lg-4 col-md-6">
+                    <a class="gallery-single-item popup-img" href="/assets/img/gallery/2.jpg">
+                        <img style="width:275px; height:185px; object-fit:cover" src="/assets/img/gallery/2.jpg" alt="image">
+                    </a>
+                </div>
+                <!-- gallery-single-item -->
+                <div class="col-lg-4 col-md-6">
+                    <a class="gallery-single-item popup-img" href="/assets/img/gallery/3.jpg">
+                        <img style="width:275px; height:185px; object-fit:cover" src="/assets/img/gallery/3.jpg" alt="image">
+                    </a>
+                </div>
+                <!-- gallery-single-item -->
+                <div class="col-lg-4 col-md-6">
+                    <a class="gallery-single-item popup-img" href="/assets/img/gallery/gallery-4.jpg">
+                        <img style="width:275px; height:185px; object-fit:cover" src="/assets/img/gallery/gallery-4.jpg" alt="image">
+                    </a>
+                </div>
+                <!-- gallery-single-item -->
+                <div class="col-lg-4 col-md-6">
+                    <a class="gallery-single-item popup-img" href="/assets/img/gallery/4.jpg">
+                        <img style="width:275px; height:185px; object-fit:cover" src="/assets/img/gallery/4.jpg" alt="image">
+                    </a>
+                </div>
+                <!-- gallery-single-item -->
+                <div class="col-lg-4 col-md-6">
+                    <a class="gallery-single-item popup-img" href="/assets/img/gallery/1.jpg">
+                        <img style="width:275px; height:185px; object-fit:cover" src="/assets/img/gallery/1.jpg" alt="image">
+                    </a>
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End Gallery Section -->
+    <!-- Start Team Section -->
+    <!-- End Partner Logo Section -->
+    <!-- Start Footer Copyright Section -->
+    <!-- End Footer Copyright Section -->
+    <!-- Start Go Top Section -->
+    <div class="go-top">
+        <i class="fas fa-chevron-up"></i>
+        <i class="fas fa-chevron-up"></i>
+    </div>
+    <script>
+
+    </script>
+    <!-- End Go Top Section -->
+    <!-- jQuery Min JS -->
+    <script src="/assets/js/jquery.min.js"></script>
+    <!-- Bootstrap Min JS -->
+    <script src="/assets/js/bootstrap.min.js"></script>
+    <!-- Mean Menu JS  -->
+    <script src="/assets/js/jquery.meanmenu.js"></script>
+    <!-- Appear Min JS -->
+    <script src="/assets/js/jquery.appear.min.js"></script>
+    <!-- CounterUp Min JS -->
+    <script src="/assets/js/jquery.waypoints.min.js"></script>
+    <script src="/assets/js/jquery.counterup.min.js"></script>
+    <!-- Owl Carousel Min JS -->
+    <script src="/assets/js/owl.carousel.min.js"></script>
+    <!-- Magnific Popup Min JS -->
+    <script src="/assets/js/jquery.magnific-popup.min.js"></script>
+    <!-- Isotope Min JS -->
+    <script src="/assets/js/isotope.pkgd.min.js"></script>
+    <!-- Swiper Min JS -->
+    <script src="/assets/js/swiper.min.js"></script>
+    <!-- jquery ui Min JS -->
+    <script src="/assets/js/jquery-ui.min.js"></script>
+    <!-- Nice Select Min JS -->
+    <script src="/assets/js/jquery.nice-select.min.js"></script>
+    <!-- WOW Min JS -->
+    <script src="/assets/js/wow.min.js"></script>
+    <!-- Main JS -->
+    <script src="/assets/js/main.js"></script>
+    <script>
+        function hide() {
+            document.getElementById("box_aside").style.display = "none";
+        }
+        function show() {
+            document.getElementById("box_aside").style.display = "block";
+            displayCart();
+        }
+    </script>
+
+
+
+    <script>
+        function updateCart() {
+            $.ajax({
+                url: '/GioHang/GetCartItems', // Thay URL này bằng route chính xác của bạn
+                type: 'GET',
+                success: function (response) {
+                    // Cập nhật lại nội dung giỏ hàng
+                    $('#cart-container').html(response);
+                },
+                error: function (error) {
+                    console.log("Lỗi khi tải giỏ hàng:", error);
+                }
+            });
+        }
+
+    </script>
+
+    <script>
+        function addToCart(maMonAn, tenMonAn, donGia, soLuong = 1, anhMon) {
+            $.ajax({
+                url: '/GioHang/AddToCart', // Đường dẫn tới action AddToCart
+                type: 'POST',
+                data: {
+                    maMonAn: maMonAn,
+                    tenMonAn: tenMonAn,
+                    donGia: donGia,
+                    soLuong: soLuong,
+                    anhMon: anhMon
+                },
+                success: function (response) {
+                    if (response.success) {
+                        // Cập nhật số lượng sản phẩm trong giỏ hàng
+                        $('#cart-count').text(response.cartCount);
+                        updateCart();
+
+                    } else {
+                        alert("Không thể thêm sản phẩm vào giỏ hàng!");
+                    }
+                },
+                error: function () {
+                    alert("Có lỗi xảy ra, vui lòng thử lại!");
+                }
+            });
+
+            // Lấy giỏ hàng từ sessionStorage hoặc khởi tạo mới nếu chưa có
+            var cart = JSON.parse(sessionStorage.getItem("Cart")) || [];
+
+            // Kiểm tra món ăn đã tồn tại trong giỏ hàng
+            var existingItem = cart.find(item => item.MaMonAn === maMonAn);
+
+            if (existingItem) {
+                // Nếu món ăn đã tồn tại, tăng số lượng
+                existingItem.SoLuong = 1
+            } else {
+                // Nếu chưa có, thêm món ăn vào giỏ hàng
+                var newItem = {
+                    MaMonAn: maMonAn,
+                    TenMonAn: tenMonAn,
+                    DonGia: donGia,
+                    SoLuong: soLuong
+                };
+                cart.push(newItem);
+            }
+
+            // Lưu giỏ hàng vào sessionStorage
+            sessionStorage.setItem("Cart", JSON.stringify(cart));
+
+            // Cập nhật số lượng giỏ hàng
+            updateCartCount();
+        }
+
+        // Hàm cập nhật số lượng giỏ hàng hiển thị
+        function updateCartCount() {
+            var content = document.getElementById("test").innerHTML;
+            if (!content) {
+                var cart = JSON.parse(sessionStorage.getItem("Cart")) || [];
+                var totalItems = cart.reduce(function (acc, item) {
+                    return acc + item.SoLuong;
+                }, 0);
+            }
+            else
+                var totalItems = 0;
+            //console.log(totalItems);
+            // Cập nhật số lượng giỏ hàng trên giao diện
+            document.getElementById("sl").textContent = totalItems;
+        }
+
+        // Gọi hàm updateCartCount khi trang được tải hoặc khi sản phẩm được thêm vào
+        window.onload = updateCartCount;
+
+    </script>
+</body>
+
+
+</html>
+

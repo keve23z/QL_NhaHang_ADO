@@ -1,0 +1,71 @@
+﻿@model IEnumerable<QL_NhaHang_ADO.Models.ChiTietNhapKhoViewModel>
+
+@{
+    ViewBag.Title = "Chi Tiết Nhập Kho";
+    Layout = "~/Views/Share/layuot_admin.cshtml";
+}
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2 class="text-primary">Chi Tiết Phiếu Nhập Kho</h2>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped table-hover">
+            <thead class="bg-primary text-white text-center">
+                <tr>
+                    <th>Mã Nhập Kho</th>
+                    <th>Mã Nguyên Liệu</th>
+                    <th>Tên Nguyên Liệu</th>
+                    <th>Số Lượng</th>
+                    <th>Thành Tiền</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (!Model.Any())
+                {
+                    <tr>
+                        <td colspan="5" class="text-center text-danger">Không có chi tiết nào!</td>
+                    </tr>
+                }
+                else
+                {
+                    foreach (var item in Model)
+                    {
+                        <tr class="text-center">
+                            <td>@item.MaNhapKho</td>
+                            <td>@item.MaNguyenLieu</td>
+                            <td>@item.TenNguyenLieu</td>
+                            <td>@item.SoLuong</td>
+                            <td>@String.Format("{0:N0} đ", item.ThanhTien)</td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<style>
+    .btn {
+        font-size: 14px;
+    }
+
+    .table th, .table td {
+        vertical-align: middle;
+        text-align: center;
+        border: 1px solid #dee2e6; /* Đảm bảo tất cả ô có border */
+    }
+
+    .table-hover tbody tr:hover {
+        background-color: #f1f1f1; /* Hiệu ứng hover */
+    }
+
+    .bg-primary {
+        background-color: #007bff !important;
+    }
+
+    .text-primary {
+        font-weight: bold;
+    }
+</style>

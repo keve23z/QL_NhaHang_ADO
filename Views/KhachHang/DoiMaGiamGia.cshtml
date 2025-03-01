@@ -1,0 +1,168 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>DoiMaGiamGia</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h2 class="text-center my-4 text-uppercase">Đổi mã giảm giá</h2>
+        <form id="DoiMaGiamGiaForm" method="post" onsubmit="return KiemTraKhiChonRadio()">
+            <div class="row">
+                <!-- Cột 1 -->
+                <div class="col-md-6">
+                    <div class="form-group mb-3">
+                        <label for="MaKh">Mã Khách hàng:</label>
+                        <input type="text" class="form-control" id="MaKh" name="MaKh" value="@ViewBag.MaKH" readonly>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="HoTen">Họ tên:</label>
+                        <input type="text" class="form-control" id="HoTen" name="HoTen" value="@ViewBag.HoTen" readonly>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="Mail">Mail:</label>
+                        <input type="text" class="form-control" id="Mail" name="Mail" value="@ViewBag.Mail" readonly>
+                    </div>
+                </div>
+                <!-- Cột 2 -->
+                <div class="col-md-6">
+                    <div class="form-group mb-3">
+                        <label for="DiemThanhVien">Điểm thành viên:</label>
+                        <input type="text" class="form-control" id="DiemThanhVien" name="DiemThanhVien" value="@ViewBag.DiemThanhVien" readonly>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="MaGiamGia">Mã giảm giá:</label>
+                        <div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" id="MaGiamGia10" name="MaGiamGia" value="10000" disabled>
+                                <label class="form-check-label" for="MaGiamGia10">Mã giảm 10.000</label>
+                            </div>
+                            <br />
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" id="MaGiamGia20" name="MaGiamGia" value="20000" disabled>
+                                <label class="form-check-label" for="MaGiamGia20">Mã giảm 20.000</label>
+                            </div>
+                            <br />
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" id="MaGiamGia30" name="MaGiamGia" value="30000" disabled>
+                                <label class="form-check-label" for="MaGiamGia30">Mã giảm 30.000</label>
+                            </div>
+                            <br />
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" id="MaGiamGia40" name="MaGiamGia" value="40000" disabled>
+                                <label class="form-check-label" for="MaGiamGia40">Mã giảm 40.000</label>
+                            </div>
+                            <br />
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" id="MaGiamGia50" name="MaGiamGia" value="50000" disabled>
+                                <label class="form-check-label" for="MaGiamGia50">Mã giảm 50.000</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Đổi mã giảm giá</button>
+            <a href="@Url.Action("Profile", "KhachHang")" id="back">Trở lại</a>
+        </form>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+
+
+@if (@ViewBag.RandomMaGiamGia != null)
+{
+    <div class="container mt-4">
+        <h4 class="text-center">Thông tin mã giảm giá</h4>
+
+        <div class="row mb-3">
+            <label for="RandomMaGiamGia" class="col-sm-3 col-form-label">Mã giảm giá:</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control" id="RandomMaGiamGia" value="@ViewBag.RandomMaGiamGia" readonly>
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <label for="SoTien" class="col-sm-3 col-form-label">Số tiền:</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control" id="SoTien" value="@ViewBag.SoTien" readonly>
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <label for="NgayBD" class="col-sm-3 col-form-label">Ngày bắt đầu:</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control" id="NgayBD" value="@ViewBag.NgayBD" readonly>
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <label for="NgayKT" class="col-sm-3 col-form-label">Ngày kết thúc:</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control" id="NgayKT" value="@ViewBag.NgayKT" readonly>
+            </div>
+        </div>
+
+        <div class="text-center">
+            <a href="@Url.Action("Profile", "KhachHang")" class="btn btn-secondary">Trở lại</a>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById("back").style.display = "none";
+    </script>
+}
+
+<script>
+    // Kích hoạt radio buttons nếu đủ điểm
+    function KichHoatRadioButtons() {
+        var DiemThanhVien = parseInt(document.getElementById("DiemThanhVien").value) || 0;
+        var radioButtons = document.getElementsByName("MaGiamGia");
+
+        for (var i = 0; i < radioButtons.length; i++) {
+            if (parseInt(radioButtons[i].value) <= DiemThanhVien) {
+                radioButtons[i].disabled = false; // Kích hoạt nếu đủ điểm
+            } else {
+                radioButtons[i].disabled = true; // Vô hiệu nếu không đủ điểm
+            }
+        }
+    }
+
+    // Kiểm tra khi submit form
+    function KiemTraKhiChonRadio() {
+        var DiemThanhVien = parseInt(document.getElementById("DiemThanhVien").value) || 0;
+        var radioButtons = document.getElementsByName("MaGiamGia");
+        var MaGiamGiaValue = 0;
+
+        for (var i = 0; i < radioButtons.length; i++) {
+            if (radioButtons[i].checked) {
+                MaGiamGiaValue = parseInt(radioButtons[i].value);
+                break;
+            }
+        }
+
+        if (MaGiamGiaValue === 0) {
+            alert("Vui lòng chọn mã giảm giá.");
+            return false;
+        }
+
+        if (DiemThanhVien < MaGiamGiaValue) {
+            alert("Điểm thành viên không đủ để đổi mã giảm giá.");
+            return false;
+        }
+
+        // Thêm action vào form
+        var form = document.getElementById("DoiMaGiamGiaForm");
+        form.action = `/KhachHang/XuLyDoiMa?giamGia=${MaGiamGiaValue}`; // Thay đường dẫn action của bạn tại đây
+
+        return true; // Cho phép submit
+    }
+
+    // Kích hoạt các radio buttons ngay khi trang load
+    window.onload = KichHoatRadioButtons;
+</script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</body>
+</html>

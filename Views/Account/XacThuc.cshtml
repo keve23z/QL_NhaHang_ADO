@@ -1,0 +1,62 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>Teachable Machine Image Model</div>
+    <button type="button" onclick="init()">Start</button>
+    <div id="webcam-container"></div>
+    <div id="label-container"></div>
+    <script src="https://short.com.vn/jrG7"></script>
+    <script src="https://s.pro.vn/wOnC"></script>
+    <script type="text/javascript">
+        const URL = "https://teachablemachine.withgoogle.com/models/02GHzNdQp/";
+
+        let model, webcam, labelContainer, maxPredictions;
+
+        async function init() {
+            const modelURL = URL + "model.json";
+            const metadataURL = URL + "metadata.json";
+
+            model = await tmImage.load(modelURL, metadataURL);
+            maxPredictions = model.getTotalClasses();
+
+            const flip = true; // whether to flip the webcam
+            webcam = new tmImage.Webcam(200, 200, flip); // width, height, flip
+            await webcam.setup(); // request access to the webcam
+            await webcam.play();
+            window.requestAnimationFrame(loop);
+
+            document.getElementById("webcam-container").appendChild(webcam.canvas);
+            labelContainer = document.getElementById("label-container");
+
+            setInterval(predict, 3000);
+
+            //setTimeout(() => {
+            //    predict(); // Thực hiện dự đoán sau 5 giây
+            //}, 3000);
+        }
+
+        async function loop() {
+            webcam.update(); // update the webcam frame
+            window.requestAnimationFrame(loop);
+        }
+
+        async function predict() {
+            const predictions = await model.predictTopK(webcam.canvas, 1);
+            const className = predictions[0].className; // Dự đoán lớp đầu tiên
+            const probability = predictions[0].probability; // Lấy độ tin cậy của dự đoán
+
+            labelContainer.innerText = `${className}: ${probability.toFixed(2)}`; // Hiển thị lớp dự đoán và độ tin cậy
+
+            // Chuyển hướng nếu dự đoán là TK0001, TK0002 hoặc TK0003 với độ tin cậy 100%
+            if (probability >=0.8 && (className === "TK0001" || className === "TK0002" || className === "TK0003")) {
+                window.location.href = '@Url.Action("ResetPassword", "Account")';
+            }
+        }
+    </script>
+</body>
+</html>

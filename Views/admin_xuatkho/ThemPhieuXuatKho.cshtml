@@ -1,0 +1,230 @@
+﻿@model IEnumerable<QL_NhaHang_ADO.Models.NguyenLieu>
+
+
+@{
+    ViewBag.Title = "ThemPhieuXuatKho";
+    Layout = "~/Views/Share/layuot_admin.cshtml";
+}
+
+<!-- Form Tạo Hóa Đơn -->
+<form method="post" action="@Url.Action("ThemPhieXuatKhoMoi", "Admin_XuatKho")">
+    <div class="app-body" style=" height: auto;">
+        <div class="row gx-4">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title">Tạo Phiếu Xuất Kho</h5>
+                    </div>
+                    <div class="card-body">
+
+                        <!-- Các trường nhập liệu cho hóa đơn -->
+                        <div class="row">
+                            <div class="col-xxl-4 col-sm-6 col-12">
+                                <div class="mb-4">
+                                    <label for="MaNV" class="form-label">Mã Nhân Viên</label>
+                                    <input type="text" id="MaNV" name="MaNV" class="form-control"
+                                           placeholder="Nhập mã nhân viên"
+                                           value="@Session["MaNV"]" required readonly>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-12">
+                                <div class="mb-4">
+                                    <label for="invNumber" class="form-label">Mã Hóa Đơn</label>
+                                    <input type="text" id="invNumber" name="MaNhapKho" class="form-control"
+                                           placeholder="Nhập Mã Hóa Đơn"
+                                           value="@ViewBag.MaPhieuNhap" required readonly>
+
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-12">
+                                <div class="mb-4">
+                                    <label for="dueDate" class="form-label">Ngày Tạo</label>
+                                    <input type="datetime-local" id="dueDate" name="NgayXuatKho" class="form-control" readonly>
+                                </div>
+
+                                <script>
+                                    // Lấy thời gian hiện tại
+                                    const now = new Date();
+
+                                    // Chuyển đổi thời gian sang múi giờ Việt Nam (UTC+7)
+                                    const vietnamTime = new Date(now.getTime());
+
+                                    // Định dạng thành 'YYYY-MM-DDTHH:mm'
+                                    const year = vietnamTime.getFullYear();
+                                    const month = String(vietnamTime.getMonth() + 1).padStart(2, '0'); // Tháng bắt đầu từ 0
+                                    const date = String(vietnamTime.getDate()).padStart(2, '0');
+                                    const hours = String(vietnamTime.getHours()).padStart(2, '0');
+                                    const minutes = String(vietnamTime.getMinutes()).padStart(2, '0');
+
+                                    const formattedNow = `${year}-${month}-${date}T${hours}:${minutes}`;
+
+                                    // Gán giá trị cho input
+                                    document.getElementById('dueDate').value = formattedNow;
+                                </script>
+
+                            </div>
+                        </div>
+
+                        <!-- Nút tạo hóa đơn và chuyển sang phần nhập chi tiết -->
+                        <div class="col-12">
+                            <div class="text-end mt-3">
+                                <button type="submit" class="btn btn-primary ms-1">Tạo</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<!-- Form Nhập Chi Tiết Hóa Đơn (hiện khi đã tạo hóa đơn) -->
+@if (ViewBag.HoaDonId != null)
+{
+    <form method="post" action="@Url.Action("ThemChiTietXuatKho", "Admin_XuatKho")">
+        <div class="app-body">
+            <div class="row gx-4">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title">Nhập Chi Tiết Phiếu Xuất Kho</h5>
+                        </div>
+                        <div class="card-body">
+                            <!-- Thêm trường ẩn để gửi MaNhapKho -->
+                            <input type="hidden" name="MaNhapKho" value="@ViewBag.HoaDonId" />
+
+                            <!-- Các mặt hàng -->
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="table-outer">
+                                        <div class="table-responsive">
+                                            <table class="table truncate">
+                                                <thead>
+                                                    <tr>
+                                                        <th colspan="7" class="pt-3 pb-3">
+                                                            Các Mặt Hàng/Sản Phẩm
+                                                        </th>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Mã Nguyên Liệu</th>
+                                                        <th>Tên Nguyên Liệu</th>
+                                                        <th width="120px"> Số Lượng</th>
+                                                        <th width="120px"> Đơn Vị Tính</th>
+                                                        <th width="120px"> Đơn Giá</th>
+                                                        <th width="120px"> Thành Tiền</th>
+                                                        <th width="120px"> Hành Động</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="productRows">
+                                                    @Html.Action("_tableNguyenLieu")
+                                                </tbody>
+                                            </table>
+                                            <button style="margin-left:10px; margin-bottom:10px" class="btn btn-dark" id="addNewRow">
+                                                Thêm Dòng Mới
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Nút thao tác -->
+                            <div class="col-12">
+                                <div class="invoice-footer">
+                                    <div class="text-end mt-3">
+                                        <button type="submit" class="btn btn-primary ms-1">Lưu Chi Tiết</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </form>
+
+}
+
+<script>
+    // Hàm tính tổng tiền
+    function updateThanhTien(input) {
+        const row = input.closest("tr");
+        const soLuong = parseInt(row.querySelector("input[name='ChiTietXuatKho[][SoLuong]']").value) || 0;
+        const donGia = parseInt(row.querySelector("input[name='ChiTietXuatKho[][DonGia]']").value) || 0;
+        const thanhTien = soLuong * donGia;
+
+        // Ghi giá trị thực vào Thành Tiền
+        row.querySelector("input[name='ChiTietXuatKho[][ThanhTien]']").value = thanhTien;
+    }
+
+    // Thêm sự kiện cho các ô số lượng và đơn giá trong các dòng hiện tại
+    document.querySelectorAll("input[name='ChiTietXuatKho[][SoLuong]'], input[name='ChiTietXuatKho[][DonGia]']").forEach(input => {
+        input.addEventListener("input", function () {
+            updateThanhTien(this);
+        });
+    });
+
+    //Cập nhật khi thêm dòng mới
+    document.getElementById("addNewRow").addEventListener("click", function (e) {
+        e.preventDefault();
+
+        const tableBody = document.querySelector("#productRows");
+        const newRow = document.createElement("tr");
+
+        newRow.innerHTML = `
+        <td>
+            <select name="ChiTietXuatKho[][TenNguyenLieu]" class="form-control" onchange="fetchIngredientDetails(this)" required>
+                <option value="">Chọn Nguyên Liệu</option>
+                ${document.querySelector("select[name='ChiTietXuatKho[][TenNguyenLieu]']").innerHTML}
+            </select>
+        </td>
+        <td><input type="text" name="ChiTietXuatKho[][MaNguyenLieu]" class="form-control" readonly></td>
+        <td><input type="number" name="ChiTietXuatKho[][SoLuong]" class="form-control" required></td>
+        <td><input type="text" name="ChiTietXuatKho[][DVT]" class="form-control" readonly></td>
+        <td><input type="number" name="ChiTietXuatKho[][DonGia]" class="form-control" readonly></td>
+        <td><input type="number" name="ChiTietXuatKho[][ThanhTien]" class="form-control" readonly></td>
+        <td>
+            <button type="button" class="btn btn-outline-dark" onclick="this.closest('tr').remove()">
+                <i class="bi bi-trash"></i>
+            </button>
+        </td>
+    `;
+
+        tableBody.appendChild(newRow);
+
+        // Gắn sự kiện cho các ô nhập mới
+        newRow.querySelectorAll("input[name='ChiTietXuatKho[][SoLuong]'], input[name='ChiTietXuatKho[][DonGia]']").forEach(input => {
+            input.addEventListener("input", function () {
+                updateThanhTien(this);
+            });
+        });
+    });
+    function fetchIngredientDetails(selectElement) {
+        const selectedName = selectElement.value;
+
+        if (selectedName) {
+            // Gọi API để lấy thông tin chi tiết nguyên liệu
+            fetch(`/Admin_XuatKho/GetNguyenLieuDetails?tenNguyenLieu=${encodeURIComponent(selectedName)}`)
+                .then(response => response.json())
+                .then(data => {
+                    // Lấy hàng hiện tại
+                    const row = selectElement.closest('tr');
+
+                    if (data.MaNguyenLieu) {
+                        // Điền thông tin vào các trường
+                        row.querySelector('[name*="[MaNguyenLieu]"]').value = data.MaNguyenLieu;
+                        row.querySelector('[name*="[DVT]"]').value = data.DVT;
+                        row.querySelector('[name*="[DonGia]"]').value = data.DonGia;
+                    } else {
+                        alert(data.error); // Nếu không tìm thấy nguyên liệu
+                    }
+                })
+                .catch(error => console.error('Lỗi khi lấy thông tin nguyên liệu:', error));
+        }
+    }
+
+</script>

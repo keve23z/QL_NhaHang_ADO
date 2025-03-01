@@ -1,0 +1,44 @@
+﻿@model IEnumerable<QL_NhaHang_ADO.Models.PhieuDatBan>
+
+@{
+    ViewBag.Title = "Đặt Bàn";
+    Layout = "~/Views/Share/layuot_admin.cshtml";
+}
+
+<h2 class="text-center my-4 text-uppercase" style="color: #f49030">Yêu Cầu Đặt Bàn Từ Khách</h2>
+
+<div class="card shadow mb-4">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped table-hover align-middle text-center">
+                <thead class="table-dark">
+                    <tr>
+                        <th>@Html.DisplayNameFor(model => model.FirstOrDefault().MaPhieu)</th>
+                        <th>@Html.DisplayNameFor(model => model.FirstOrDefault().MaKH)</th>
+                        <th>@Html.DisplayNameFor(model => model.FirstOrDefault().NgayDat)</th>
+                        <th>@Html.DisplayNameFor(model => model.FirstOrDefault().GIODAT)</th>
+                        <th>@Html.DisplayNameFor(model => model.FirstOrDefault().TenKH)</th>
+                        <th>@Html.DisplayNameFor(model => model.FirstOrDefault().SoLuong)</th>
+                        <th>@Html.DisplayNameFor(model => model.FirstOrDefault().Email)</th>
+                        <th>@Html.DisplayNameFor(model => model.FirstOrDefault().SDT)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.MaPhieu</td>
+                            <td>@item.MaKH</td>
+                            <td>@item.NgayDat</td>
+                            <td>@item.GIODAT</td>
+                            <td>@item.TenKH</td>
+                            <td>@item.SoLuong</td>
+                            <td>@item.Email</td>
+                            <td>@item.SDT</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

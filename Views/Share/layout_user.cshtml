@@ -1,0 +1,307 @@
+﻿<div>
+    <div>
+
+        <style>
+            #box_aside {
+                z-index: 999999;
+                margin-top: -10px;
+                margin-left: -10px;
+            }
+
+            #box_aside {
+                background: #929292ba;
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                z-index: 2020;
+                position: fixed;
+            }
+
+                #box_aside .giohang_index {
+                    width: 500px;
+                    height: 100%;
+                    right: 0px;
+                    position: absolute;
+                    background: #fff;
+                    z-index: 2002;
+                    position: fixed;
+                }
+
+            .cart {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                width: 150px;
+                height: 55px;
+                margin-left: 20px;
+                border: 1px solid #ff8d25;
+            }
+
+            .cart_icon {
+                font-size: 35px;
+                color: white;
+            }
+
+            .cart {
+                border-radius: 5px;
+                padding: 10px;
+                display: flex;
+                align-items: center;
+            }
+
+            .cart_icon {
+                font-size: 25px;
+                color: #ff8d25;
+            }
+
+            .cart-count {
+                width: 15px;
+                height: 25px;
+                color: #ff8d25;
+                position: relative;
+                z-index: 999;
+            }
+
+            .cart_text {
+                color: rgb(215, 202, 202);
+            }
+        </style>
+
+        <!-- Start Preloader Area -->
+        <div class="preloader">
+            <div class="d-table">
+                <div class="d-table-cell">
+                    <div class="lds-spinner">
+                        <div></div><div></div><div></div>
+                        <div></div><div></div><div></div>
+                        <div></div><div></div><div></div>
+                        <div></div><div></div><div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Preloader Area -->
+        <!-- Start Navbar Area -->
+        <div class="header-navber-area">
+
+            <div class="navbar-area">
+                <div class="brulee-responsive-nav">
+                    <div class="container">
+                        <div class="brulee-responsive-menu">
+                            <div class="logo">
+                                <a href="index-2.html">
+                                    <img src="/assets/img/logo.png" class="white-logo" alt="logo">
+                                    <img src="/assets/img/logo-black.png" class="black-logo" alt="logo">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @Html.Action("HienThiGioHang", "GioHang")
+
+
+                <div class="brulee-nav">
+                    <div class="container" style="max-width: 1300px">
+                        <nav class="navbar navbar-expand-md navbar-light">
+                            <a class="navbar-brand" href="/Account/Welcome">
+                                <div style="display:flex; align-items:center">
+                                    <img src="/assets/img/logo_test1.png" class="white-logo" alt="logo">
+                                    <img src="/assets/img/logo_test1.png" class="black-logo" alt="logo">
+                                    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+                                    <b style="font-family: 'Dancing Script', cursive; color: #fe8d25; font-size: 25px;">CHAY TUỆ</b>
+
+
+                                </div>
+                            </a>
+                            <div class="collapse navbar-collapse mean-menu" id="navbarSupportedContent">
+                                <ul class="navbar-nav">
+                                    <li class="nav-item">
+                                        <a href="/Account/Welcome" class="nav-link">Trang chủ</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="#gallery" class="nav-link">Giới thiệu</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="/MonAn/Menu" class="nav-link">Menu </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="#footer" class="nav-link">Liên hệ</a>
+
+                                    </li>
+                                </ul>
+                                @if (Session["MaTaiKhoan"] == null)
+                                {
+                                    <div class="other-option">
+                                        <a class="default-btn" href="@Url.Action("DangNhap", "Account")">Đăng nhập/Đăng ký<span></span></a>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="user-info">
+
+                                        <a href="@Url.Action("Profile", "KhachHang")">
+                                            <img style="width:50px; height:50px; border-radius:50%; object-fit:cover;" src="@Url.Content("/Images/Avatar/" + Session["Avatar"])" alt="Avatar" class="avatar" />
+                                        </a>
+                                    </div>
+                                }
+                                <div onclick="show()" id="cartt" class="cart">
+                                    <div class="cart_icon">
+                                        <i class="fa-solid fa-cart-shopping"></i>
+                                    </div>
+                                    <div class="cart_text">Giỏ hàng</div>
+                                    <div class="cart-count" id="sl">0</div>
+                                </div>
+
+                            </div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Navbar Area -->
+        @RenderBody()
+        <!-- Start Footer Section -->
+        <section id="footer" class="footer-area">
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-lg-3 col-md-6 footer-box-item">
+                        <div class="footer-list">
+                            <h5 class="title">Liên Hệ</h5>
+                            <div class="footer-contact-info">
+                                <ul class="footer-contact-list">
+                                    <li><i class="fa fa-location-dot"></i> 140 Lê Trọng Tấn, Tây Thạnh, Tân Phú, TPHCM</li>
+                                    <li><i class="fa fa-mobile-screen-button"></i> <a href="tel:101202303">0989187077</a></li>
+                                    <li><i class="fa fa-envelope"></i> <a href="mailto:random@example.com">chaytue0203@gmail.com</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 footer-box-item">
+                        <div class="footer-list">
+                            <h5 class="title">Giờ Mở Cửa</h5>
+                            <ul class="footer-opening-time-list">
+                                <li>Thứ 2 - Thứ 6 <span>09:00 – 22:00</span></li>
+                                <li>Thứ Bảy <span>08:00 – 08:00</span></li>
+                                <li>Chủ nhật <span>Ngày Nghỉ</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 footer-box-item">
+                        <div class="footer-list">
+                            <h5 class="title">Đăng Ký Thành Viên</h5>
+                            <div class="footer-info-newsletter">
+                                <form class="newsletter-form">
+                                    <input type="email" class="input-newsletter" placeholder="Nhập Email" name="EMAIL" required="" autocomplete="off">
+                                    <button class="default-btn" type="submit">Đăng Ký <span></span></button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- End Footer Section -->
+        <script>
+            function hide() {
+                document.getElementById("box_aside").style.display = "none";
+            }
+            function show() {
+                document.getElementById("box_aside").style.display = "block";
+                displayCart();
+            }
+
+        </script>
+
+
+
+        <script>
+            function updateCart() {
+                $.ajax({
+                    url: '/GioHang/GetCartItems', // Thay URL này bằng route chính xác của bạn
+                    type: 'GET',
+                    success: function (response) {
+                        // Cập nhật lại nội dung giỏ hàng
+                        $('#cart-container').html(response);
+                    },
+                    error: function (error) {
+                        console.log("Lỗi khi tải giỏ hàng:", error);
+                    }
+                });
+            }
+
+        </script>
+
+        <script>
+            function addToCart(maMonAn, tenMonAn, donGia, soLuong = 1, anhMon) {
+                $.ajax({
+                    url: '/GioHang/AddToCart', // Đường dẫn tới action AddToCart
+                    type: 'POST',
+                    data: {
+                        maMonAn: maMonAn,
+                        tenMonAn: tenMonAn,
+                        donGia: donGia,
+                        soLuong: soLuong,
+                        anhMon: anhMon
+                    },
+                    success: function (response) {
+                        if (response.success) {
+                            // Cập nhật số lượng sản phẩm trong giỏ hàng
+                            $('#cart-count').text(response.cartCount);
+                            updateCart();
+
+                        } else {
+                            alert("Không thể thêm sản phẩm vào giỏ hàng!");
+                        }
+                    },
+                    error: function () {
+                        alert("Có lỗi xảy ra, vui lòng thử lại!");
+                    }
+                });
+
+                // Lấy giỏ hàng từ sessionStorage hoặc khởi tạo mới nếu chưa có
+                var cart = JSON.parse(sessionStorage.getItem("Cart")) || [];
+
+                // Kiểm tra món ăn đã tồn tại trong giỏ hàng
+                var existingItem = cart.find(item => item.MaMonAn === maMonAn);
+
+                if (existingItem) {
+                    // Nếu món ăn đã tồn tại, tăng số lượng
+                    existingItem.SoLuong = 1
+                } else {
+                    // Nếu chưa có, thêm món ăn vào giỏ hàng
+                    var newItem = {
+                        MaMonAn: maMonAn,
+                        TenMonAn: tenMonAn,
+                        DonGia: donGia,
+                        SoLuong: soLuong
+                    };
+                    cart.push(newItem);
+                }
+
+                // Lưu giỏ hàng vào sessionStorage
+                sessionStorage.setItem("Cart", JSON.stringify(cart));
+
+                // Cập nhật số lượng giỏ hàng
+                updateCartCount();
+            }
+
+            //// Hàm cập nhật số lượng giỏ hàng hiển thị
+            //function updateCartCount() {
+            //    var cart = JSON.parse(sessionStorage.getItem("Cart")) || [];
+            //    var totalItems = cart.reduce(function (acc, item) {
+            //        return acc + item.SoLuong;
+            //    }, 0);
+
+            //    // Cập nhật số lượng giỏ hàng trên giao diện
+            //    document.getElementById("sl").textContent = totalItems;
+            //}
+
+            //// Gọi hàm updateCartCount khi trang được tải hoặc khi sản phẩm được thêm vào
+            //window.onload = updateCartCount;
+
+
+        </script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    </div>
+</div>

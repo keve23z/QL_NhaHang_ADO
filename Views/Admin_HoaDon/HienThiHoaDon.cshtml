@@ -1,0 +1,90 @@
+﻿@model IEnumerable<QL_NhaHang_ADO.Models.PhieuNhapKho>
+
+@{
+    ViewBag.Title = "Danh Sách Phiếu Nhập Kho";
+    Layout = "~/Views/Share/layuot_admin.cshtml";
+}
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2 class="text-primary">Phiếu Nhập Kho</h2>
+        <a href="@Url.Action("ThemHoaDon", "Admin_HoaDon")" class="btn btn-success btn-lg">
+            <i class="bi bi-plus-circle"></i> Tạo Phiếu Nhập Kho Mới
+        </a>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped table-hover">
+            <thead class="bg-primary text-white text-center">
+                <tr>
+                    <th>Mã Nhập Kho</th>
+                    <th>Mã Nhân Viên</th>
+                    <th>Ngày Nhập Kho</th>
+                    <th>Tổng Tiền</th>
+                    <th>Hành động</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (!Model.Any())
+                {
+                    <tr>
+                        <td colspan="5" class="text-center text-danger">Không có phiếu nhập kho nào!</td>
+                    </tr>
+                }
+                else
+                {
+                    foreach (var item in Model)
+                    {
+                        <tr class="text-center">
+                            <td>@item.MaNhapKho</td>
+                            <td>@item.MaNV</td>
+                            <td>@item.NgayNhapKho.ToString("dd/MM/yyyy")</td>
+                            <td>@String.Format("{0:N0} đ", item.TongTien)</td>
+                            <td>
+                                <a href="@Url.Action("chitietNhapKho", "Admin_HoaDon", new { MaNhapKho = item.MaNhapKho })" class="btn btn-info btn-sm">
+                                    <i class="bi bi-eye"></i> Chi tiết
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<style>
+    .btn {
+        font-size: 14px;
+    }
+
+    .table th, .table td {
+        vertical-align: middle;
+        text-align: center;
+    }
+
+    .table-hover tbody tr:hover {
+        background-color: #f1f1f1;
+    }
+
+    .text-primary {
+        font-weight: bold;
+    }
+    .table th, .table td {
+        vertical-align: middle;
+        text-align: center;
+        border: 1px solid #dee2e6; /* Đảm bảo tất cả ô có border */
+    }
+
+    .table-hover tbody tr:hover {
+        background-color: #f1f1f1;
+    }
+
+    .table tbody tr:last-child td {
+        border-bottom: 1px solid #dee2e6; /* Đảm bảo dòng cuối có border dưới */
+    }
+
+    .text-primary {
+        font-weight: bold;
+    }
+</style>

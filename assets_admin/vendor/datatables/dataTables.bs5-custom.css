@@ -1,0 +1,37 @@
+table.dataTable {
+	color: #333333;
+	margin-bottom: 5px !important;
+	border: 1px solid #cccccc;
+}
+table.dataTable td {
+	color: #555555;
+}
+table.dataTable td.highlight {
+	background: #eaf1ff;
+	color: #333333;
+}
+.page-link {
+	color: #333333;
+	border-color: #cccccc;
+}
+.page-link:hover {
+	background-color: #ffffff;
+	color: #0068ff;
+	border-color: #cccccc;
+}
+.page-link.active,
+.active > .page-link {
+	background-color: #0068ff;
+	border: 1px solid #0068ff;
+	color: #ffffff;
+}
+.page-link.disabled, .disabled>.page-link {
+	border-color: #cccccc;
+	background-color: #e6e6e6;
+}
+div.dataTables_wrapper div.dataTables_info {
+	display: inline-block;
+}
+div.dataTables_wrapper div.dataTables_paginate {
+	float: right;
+}

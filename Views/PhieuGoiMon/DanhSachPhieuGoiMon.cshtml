@@ -1,0 +1,47 @@
+﻿@model IEnumerable<QL_NhaHang_ADO.Models.PhieuGoiMon>
+
+@{
+    ViewBag.Title = "Danh Sách Phiếu Gọi Món";
+    Layout = "~/Views/Share/layuot_admin.cshtml";
+}
+
+<div class="container mt-5">
+    <h2 class="mb-4 text-center" style="color: #f49030 ">Danh Sách Phiếu Gọi Món</h2>
+    <div class="mb-3 text-end">
+        <a href="@Url.Action("ThemPhieuGoiMon", "PhieuGoiMon")"
+           class="btn btn-success btn-lg d-flex align-items-center justify-content-center">
+            <i class="fas fa-plus me-2"></i> Thêm Mới Phiếu
+        </a>
+    </div>
+
+    <table class="table table-striped table-hover">
+        <thead class="table-dark">
+            <tr>
+                <th>Mã Phiếu Gọi Món</th>
+                <th>Mã Bàn</th>
+                <th class="text-center">Hành Động</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.MaPGM)</td>
+                    <td>@Html.DisplayFor(modelItem => item.MaBan)</td>
+                    <td class="text-center">
+                        <!-- Sửa -->
+                        <!--@Html.ActionLink("Sửa", "Edit", new { id = item.MaPGM }, new { @class = "btn btn-warning btn-sm me-2 shadow-sm rounded-pill hover-effect" })-->
+                        <!-- Chi Tiết -->
+                        @Html.ActionLink("Chi Tiết", "ChiTietPhieu", new { ma = item.MaPGM, maBan = item.MaBan }, new { @class = "btn btn-info btn-sm me-2 shadow-sm rounded-pill hover-effect" })
+
+                        <!-- Xóa -->
+                        @Html.ActionLink("Xóa", "XoaPhieu", new { ma = item.MaPGM }, new { @class = "btn btn-danger btn-sm shadow-sm rounded-pill hover-effect" })
+
+                    </td>
+
+
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

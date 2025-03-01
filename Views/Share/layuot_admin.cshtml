@@ -1,0 +1,245 @@
+﻿
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+
+<!-- Mirrored from www.bootstrapget.com/demos/templatemonster/adminlite-bootstrap-admin-panel/create-invoice.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 25 Nov 2024 15:57:20 GMT -->
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Quản lý nhà hàng Admin</title>
+
+    <!-- Meta -->
+    <meta name="description" content="Marketplace for Bootstrap Admin Dashboards" />
+    <meta name="author" content="Bootstrap Gallery" />
+    <link rel="canonical" href="https://www.bootstrap.gallery/">
+    <meta property="og:url" content="https://www.bootstrap.gallery/">
+    <meta property="og:title" content="Nhan Vien-Chay Viên">
+    <meta property="og:description" content="Marketplace for Bootstrap Admin Dashboards">
+    <meta property="og:type" content="Website">
+    <meta property="og:site_name" content="Bootstrap Gallery">
+    <link rel="shortcut icon" href="/assets_admin/images/favicon.svg" />
+
+    <!-- *************
+            ************ CSS Files *************
+        ************* -->
+    <link rel="stylesheet" href="/assets_admin/fonts/bootstrap/bootstrap-icons.css" />
+    <link rel="stylesheet" href="/assets_admin/css/main.min.css" />
+
+    <!-- *************
+            ************ Vendor Css Files *************
+        ************ -->
+    <!-- Scrollbar CSS -->
+    <link rel="stylesheet" href="/assets_admin/vendor/overlay-scroll/OverlayScrollbars.min.css" />
+</head>
+
+<body>
+
+    <!-- Page wrapper starts -->
+    <div class="page-wrapper">
+
+        <!-- Main container starts -->
+        <div class="main-container">
+
+            <!-- Sidebar wrapper starts -->
+            <nav id="sidebar" class="sidebar-wrapper">
+
+                <!-- App brand starts -->
+                <div class="app-brand p-3 mb-3" style="background-color:white">
+                    <img src="/assets/img/logo_test1.png" class="white-logo" alt="logo">
+                    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+                    <b style="font-family: 'Dancing Script', cursive; color: #fe8d25; font-size: 25px;">CHAY TUỆ</b>
+                </div>
+                <!-- App brand ends -->
+                <!-- Sidebar menu starts -->
+                <div class="sidebarMenuScroll">
+                    <ul class="sidebar-menu">
+                        <li>
+                            <a href="/Admin_MonAn/DanhSachMonAn">
+                                <i class="bi bi-border-all"></i>
+                                <span class="menu-text">Nhập Món Ăn</span>
+                            </a>
+                        </li>
+                        <li class="treeview">
+                            <a href="#!">
+                                <i class="bi bi-shop-window"></i>
+                                <span class="menu-text">Quản Lý Kho</span>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li>
+                                    <a href="/Admin_NguyenLieu/HienThiNguyenLieu">
+                                        <span class="menu-text">Danh Sách Kho</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/Admin_HoaDon/HienThiHoaDon">
+                                        <span class="menu-text">Nhập Kho</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/Admin_XuatKho/HienThiXuatKho">
+                                        <span class="menu-text">Xuất Kho</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li class="treeview">
+                            <a href="#!">
+                                <i class="bi bi-window-sidebar"></i>
+                                <span class="menu-text">Hóa Đơn</span>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li>
+                                    <a href="/NhaHang/ShowHD">
+                                        <span class="menu-text">Danh Sách Hóa  Đơn</span>
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="/PhieuGoiMon/DanhSachPhieuGoiMon">
+                                        <span class="menu-text">Danh Sách Phiếu Gọi Món</span>
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </li>
+
+                        <li class="treeview">
+                            <a href="#!">
+                                <i class="bi bi-clipboard-check"></i>
+                                <span class="menu-text">Quản Lý Bàn</span>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li>
+                                    <a href="/QuanLyBan/ShowBan">
+                                        <span class="menu-text">Danh Sách Bàn</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/Admin_DatBan/DatBan">
+                                        <span class="menu-text">Phiếu Đặt Bàn</span>
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </li>
+                        <li class="treeview">
+                            <a href="#!">
+                                <i class="bi bi-stickies"></i>
+                                <span class="menu-text">Mã Giảm Giá</span>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li>
+                                    <a href="/Admin_GiamGia/HienThiMaGiamGia">
+                                        <span class="menu-text">Danh Sách Mã Giảm Giá</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/Admin_GiamGia/TaoMaGiamGia">
+                                        <span class="menu-text">Tạo Mã Giảm Giá</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+
+
+            </nav>
+            <!-- Sidebar wrapper ends -->
+            <!-- App container starts -->
+            <div class="app-container">
+
+                <!-- App header starts -->
+                <div class="app-header d-flex align-items-center">
+
+                    <!-- Toggle buttons starts -->
+                    <div class="d-flex">
+                        <button class="pin-sidebar">
+                            <i class="bi bi-list lh-1"></i>
+                        </button>
+                    </div>
+                    <!-- Toggle buttons ends -->
+                    <!-- App brand sm starts -->
+                    <div class="app-brand-sm d-lg-none d-flex">
+                        <a href="index.html">
+                            <img src="/assets_admin/images/logo-sm.svg" class="logo" alt="AdminLite Bootstrap Template" />
+                        </a>
+                    </div>
+                    <!-- App brand sm ends -->
+                    <!-- App header actions starts -->
+                    <div class="header-actions">
+
+                        <!-- Search container starts -->
+                        <!-- Search container ends -->
+                        <div class="d-sm-flex d-none gap-3">
+
+                            <a href="/Account/Logout">
+                                <button class="btn btn-white">
+                                    Đăng xuất
+                                </button>
+                            </a>
+
+                        </div>
+
+                        <div class="d-flex">
+                            <button class="toggle-sidebar">
+                                <i class="bi bi-list lh-1"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <!-- App header actions ends -->
+
+                </div>
+                <!-- App header ends -->
+                <!-- App body starts -->
+                <div class="app-body">
+
+                    <!-- Row starts -->
+                    <div class="row gx-4">
+                        @RenderBody()
+
+                        <div class="app-footer">
+                            <span class="small">© Chay Tuệ 2024</span>
+                        </div>
+
+
+                    </div>
+                    <!-- App container ends -->
+
+                </div>
+                <!-- Main container ends -->
+
+            </div>
+        </div>
+    </div>
+    <!-- Page wrapper ends -->
+    <!-- *************
+            ************ JavaScript Files *************
+        ************* -->
+    <!-- Required jQuery first, then Bootstrap Bundle JS -->
+    <script src="/assets_admin/js/jquery.min.js"></script>
+    <script src="/assets_admin/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets_admin/js/moment.min.js"></script>
+
+    <!-- *************
+            ************ Vendor Js Files *************
+        ************* -->
+    <!-- Overlay Scroll JS -->
+    <script src="/assets_admin/vendor/overlay-scroll/jquery.overlayScrollbars.min.js"></script>
+    <script src="/assets_admin/vendor/overlay-scroll/custom-scrollbar.js"></script>
+
+    <!-- Custom JS files -->
+    <script src="/assets_admin/js/custom.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</body>
+
+
+<!-- Mirrored from www.bootstrapget.com/demos/templatemonster/adminlite-bootstrap-admin-panel/create-invoice.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 25 Nov 2024 15:57:20 GMT -->
+</html>

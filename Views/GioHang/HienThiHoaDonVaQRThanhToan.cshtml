@@ -1,0 +1,95 @@
+﻿@model QL_NhaHang_ADO.Models.ViewThanhToan
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+<div class="container mt-5">
+    <div class="row d-flex justify-content-center align-items-center">
+        <!-- Danh sách sản phẩm (Bên trái) -->
+        <div class="col-md-6">
+            <h3 class="mb-4 text-center">Thông tin hóa đơn</h3>
+            <div class="mb-4">
+                <strong>Mã hóa đơn: </strong>@Model.HoaDon.Ma<br>
+                <strong>Ngày lập: </strong>@Model.HoaDon.NgayLap.ToString()<br>
+                <strong>Mã khách hàng: </strong>@Model.HoaDon.MaKH<br>
+                <strong>Tên khách hàng: </strong>@Model.HoaDon.TenKhachHang<br>
+                <strong>Phương thức thanh toán: </strong>@Model.HoaDon.HinhThuc<br>
+                <strong>Mã giảm giá: </strong>@Model.HoaDon.MaGiamGia<br>
+            </div>
+
+            <h3 class="mb-4 text-center">Danh sách sản phẩm</h3>
+            <table class="table table-bordered">
+                <thead class="thead-light">
+                    <tr>
+                        <th>Tên món ăn</th>
+                        <th>Số lượng</th>
+                        <th>Đơn giá</th>
+                        <th>Thành tiền</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.ChiTietHoaDonList)
+                    {
+                        <tr>
+                            <td>@item.TenMon</td>
+                            <td>@item.SoLuong</td>
+                            <td>@String.Format("{0:N0}", item.GiaMon) ₫</td>
+                            <td>@String.Format("{0:N0}", item.ThanhTien) ₫</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <div class="text-right font-weight-bold mt-3">
+                Tổng cộng:
+                <span class="text-danger">
+                    @String.Format("{0:N0}", Model.SoTienSauGiamGia)₫
+                    @if (Model.TongTien != Model.SoTienSauGiamGia)
+                    {
+                        <span style="text-decoration: line-through; margin-left: 10px;">
+                            @String.Format("{0:N0}", Model.TongTien)₫
+                        </span>
+                    }
+                    else
+                    {
+                        <span style="display: none;">
+                            @String.Format("{0:N0}", Model.TongTien)₫
+                        </span>
+                    }
+                </span>
+            </div>
+
+        </div>
+
+        <!-- QR Thanh toán (Bên phải) -->
+        <div class="col-md-4">
+            <h3 class="mb-4 text-center">QR Thanh Toán</h3>
+            <p class="text-muted text-center">Quét mã để thanh toán hóa đơn</p>
+            <img src="https://api.vieqr.com/vietqr/VietinBank/113366668888/@Model.HoaDon.GiaGiam/full.jpg?NDck=UngHoCV&FullName=Quy%20Vacxin%20Covid"
+                 alt="QR Thanh Toán"
+                 class="img-fluid rounded mx-auto d-block">
+            <p class="mt-3 text-center">
+                <strong>Ngân hàng: VietinBank</strong><br />
+                Số tài khoản: <strong>113366668888</strong><br />
+                Tên tài khoản: <strong>Nhà Hàng Chay Tuệ</strong>
+            </p>
+
+            <!-- Form gửi thông tin thanh toán -->
+            <form method="post" action="@Url.Action("DaThanhToan", "GioHang")">
+                <input type="hidden" name="MaHoaDon" value="@Model.HoaDon.Ma" />
+                <input type="hidden" name="MaKH" value="@Model.HoaDon.MaKH" />
+                <input type="hidden" name="TongTien" value="@Model.TongTien" />
+                <input type="hidden" name="HinhThuc" value="@Model.HoaDon.HinhThuc" />
+                <input type="hidden" name="MaGiamGia" value="@Model.HoaDon.MaGiamGia" />
+                <input type="hidden" name="SauGiam" value="@Model.HoaDon.GiaGiam" />
+                @foreach (var item in Model.ChiTietHoaDonList)
+                {
+                    <input type="hidden" name="ChiTietHoaDon[0].MaMon" value="@item.MaMA" />
+                    <input type="hidden" name="ChiTietHoaDon[0].SoLuong" value="@item.SoLuong" />
+                    <input type="hidden" name="ChiTietHoaDon[0].GiaMon" value="@item.GiaMon" />
+                    <input type="hidden" name="ChiTietHoaDon[0].ThanhTien" value="@item.ThanhTien" />
+                }
+
+
+                <button type="submit" class="btn btn-success mt-3">Đã Thanh Toán</button>
+            </form>
+        </div>
+    </div>
+</div>

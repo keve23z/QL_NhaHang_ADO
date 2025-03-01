@@ -1,0 +1,38 @@
+﻿@model IEnumerable<QL_NhaHang_ADO.Models.MaGiamGia>
+
+@{
+    ViewBag.Title = "Hiển Thị Mã Giảm Giá";
+    Layout = "~/Views/Share/layuot_admin.cshtml";
+}
+
+<h2 class="text-center my-4 text-uppercase"style="color: #fa8f23" >Danh Sách Mã Giảm Giá</h2>
+
+<div class="card shadow mb-4">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped table-hover align-middle text-center">
+                <thead>
+                    <tr>
+                        <th>Mã Giảm Giá</th>
+                        <th>@Html.DisplayNameFor(model => model.FirstOrDefault().NgayBD)</th>
+                        <th>@Html.DisplayNameFor(model => model.FirstOrDefault().NgayKT)</th>
+                        <th>@Html.DisplayNameFor(model => model.FirstOrDefault().SoLuong)</th>
+                        <th>@Html.DisplayNameFor(model => model.FirstOrDefault().SoTien)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.MaGiamGia_Code</td>
+                            <td>@item.NgayBD</td>
+                            <td>@item.NgayKT</td>
+                            <td>@item.SoLuong</td>
+                            <td>@String.Format("{0:N0}", item.SoTien) VNĐ</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

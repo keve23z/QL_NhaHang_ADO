@@ -1,0 +1,539 @@
+﻿<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{88E7EA58-0B87-475C-9084-AA21904F97DB}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>QL_NhaHang_ADO</RootNamespace>
+    <AssemblyName>QL_NhaHang_ADO</AssemblyName>
+    <TargetFrameworkVersion>v4.8.1</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort>44344</IISExpressSSLPort>
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.9.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.AspNet.WebApi.Client.5.2.9\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Http, Version=5.2.9.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.AspNet.WebApi.Core.5.2.9\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.2.9.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.AspNet.WebApi.WebHost.5.2.9\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System.Web.Razor">
+      <HintPath>packages\Microsoft.AspNet.Razor.3.2.9\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages">
+      <HintPath>packages\Microsoft.AspNet.Webpages.3.2.9\lib\net45\System.Web.Webpages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages.Deployment">
+      <HintPath>packages\Microsoft.AspNet.Webpages.3.2.9\lib\net45\System.Web.Webpages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages.Razor">
+      <HintPath>packages\Microsoft.AspNet.Webpages.3.2.9\lib\net45\System.Web.Webpages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Helpers">
+      <HintPath>packages\Microsoft.AspNet.Webpages.3.2.9\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure">
+      <HintPath>packages\Microsoft.Web.Infrastructure.2.0.1\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc">
+      <HintPath>packages\Microsoft.AspNet.Mvc.5.2.9\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform">
+      <HintPath>packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="assets_admin\css\main.min.css" />
+    <Content Include="assets_admin\fonts\bootstrap\bootstrap-icons.css" />
+    <Content Include="assets_admin\images\bg.jpg" />
+    <Content Include="assets_admin\images\cards\american-express.png" />
+    <Content Include="assets_admin\images\cards\diners.png" />
+    <Content Include="assets_admin\images\cards\discover.png" />
+    <Content Include="assets_admin\images\cards\jcb.png" />
+    <Content Include="assets_admin\images\cards\mastercard.png" />
+    <Content Include="assets_admin\images\cards\visa.png" />
+    <Content Include="assets_admin\images\coming-soon.svg" />
+    <Content Include="assets_admin\images\error.svg" />
+    <Content Include="assets_admin\images\favicon.svg" />
+    <Content Include="assets_admin\images\flags\1x1\au.svg" />
+    <Content Include="assets_admin\images\flags\1x1\de.svg" />
+    <Content Include="assets_admin\images\flags\1x1\hk.svg" />
+    <Content Include="assets_admin\images\flags\1x1\ru.svg" />
+    <Content Include="assets_admin\images\flags\1x1\tz.svg" />
+    <Content Include="assets_admin\images\logo-dark.svg" />
+    <Content Include="assets_admin\images\logo-sm.svg" />
+    <Content Include="assets_admin\images\logo.svg" />
+    <Content Include="assets_admin\images\placeholder.svg" />
+    <Content Include="assets_admin\images\products\banner.jpg" />
+    <Content Include="assets_admin\images\products\banner2.jpg" />
+    <Content Include="assets_admin\images\products\banner3.jpg" />
+    <Content Include="assets_admin\images\products\product1.jpg" />
+    <Content Include="assets_admin\images\products\product10.jpg" />
+    <Content Include="assets_admin\images\products\product2.jpg" />
+    <Content Include="assets_admin\images\products\product3.jpg" />
+    <Content Include="assets_admin\images\products\product4.jpg" />
+    <Content Include="assets_admin\images\products\product5.jpg" />
+    <Content Include="assets_admin\images\products\product6.jpg" />
+    <Content Include="assets_admin\images\products\product7.jpg" />
+    <Content Include="assets_admin\images\products\product8.jpg" />
+    <Content Include="assets_admin\images\products\product9.jpg" />
+    <Content Include="assets_admin\images\user.png" />
+    <Content Include="assets_admin\images\user1.png" />
+    <Content Include="assets_admin\images\user2.png" />
+    <Content Include="assets_admin\images\user3.png" />
+    <Content Include="assets_admin\images\user4.png" />
+    <Content Include="assets_admin\images\user5.png" />
+    <Content Include="assets_admin\js\bootstrap.bundle.min.js" />
+    <Content Include="assets_admin\js\custom.js" />
+    <Content Include="assets_admin\js\jquery.min.js" />
+    <Content Include="assets_admin\js\modernizr.js" />
+    <Content Include="assets_admin\js\moment.min.js" />
+    <Content Include="assets_admin\js\raphael.min.js" />
+    <Content Include="assets_admin\js\validations.js" />
+    <Content Include="assets_admin\vendor\apex\apexcharts.min.js" />
+    <Content Include="assets_admin\vendor\apex\custom\contracts\type.js" />
+    <Content Include="assets_admin\vendor\apex\custom\contracts\value.js" />
+    <Content Include="assets_admin\vendor\apex\custom\crm\deals.js" />
+    <Content Include="assets_admin\vendor\apex\custom\crm\invoices.js" />
+    <Content Include="assets_admin\vendor\apex\custom\crm\leads.js" />
+    <Content Include="assets_admin\vendor\apex\custom\crm\tickets.js" />
+    <Content Include="assets_admin\vendor\apex\custom\expenses\expenses.js" />
+    <Content Include="assets_admin\vendor\apex\custom\graphs\area.js" />
+    <Content Include="assets_admin\vendor\apex\custom\graphs\bar.js" />
+    <Content Include="assets_admin\vendor\apex\custom\graphs\candlestick.js" />
+    <Content Include="assets_admin\vendor\apex\custom\graphs\column-area.js" />
+    <Content Include="assets_admin\vendor\apex\custom\graphs\donut.js" />
+    <Content Include="assets_admin\vendor\apex\custom\graphs\gauge.js" />
+    <Content Include="assets_admin\vendor\apex\custom\graphs\heatmap.js" />
+    <Content Include="assets_admin\vendor\apex\custom\graphs\line.js" />
+    <Content Include="assets_admin\vendor\apex\custom\graphs\pie.js" />
+    <Content Include="assets_admin\vendor\apex\custom\graphs\radial-bar.js" />
+    <Content Include="assets_admin\vendor\apex\custom\home\income.js" />
+    <Content Include="assets_admin\vendor\apex\custom\home\revenue.js" />
+    <Content Include="assets_admin\vendor\apex\custom\home\sales.js" />
+    <Content Include="assets_admin\vendor\apex\custom\home\sparkline.js" />
+    <Content Include="assets_admin\vendor\apex\custom\home\visits-conversions.js" />
+    <Content Include="assets_admin\vendor\apex\custom\invoice\summary.js" />
+    <Content Include="assets_admin\vendor\apex\custom\leads\leads.js" />
+    <Content Include="assets_admin\vendor\apex\custom\leads\value.js" />
+    <Content Include="assets_admin\vendor\apex\custom\profile\income.js" />
+    <Content Include="assets_admin\vendor\apex\custom\projects\projects.js" />
+    <Content Include="assets_admin\vendor\apex\custom\support\calls.js" />
+    <Content Include="assets_admin\vendor\apex\custom\support\tickets.js" />
+    <Content Include="assets_admin\vendor\apex\custom\tasks\tasks.js" />
+    <Content Include="assets_admin\vendor\apex\custom\widgets\sparkline.js" />
+    <Content Include="assets_admin\vendor\calendar\css\custom.css" />
+    <Content Include="assets_admin\vendor\calendar\css\main.min.css" />
+    <Content Include="assets_admin\vendor\calendar\custom\daygrid-calendar.js" />
+    <Content Include="assets_admin\vendor\calendar\js\main.min.js" />
+    <Content Include="assets_admin\vendor\datatables\buttons\buttons.colVis.min.js" />
+    <Content Include="assets_admin\vendor\datatables\buttons\buttons.html5.min.js" />
+    <Content Include="assets_admin\vendor\datatables\buttons\buttons.print.min.js" />
+    <Content Include="assets_admin\vendor\datatables\buttons\dataTables.bs5-custom.css" />
+    <Content Include="assets_admin\vendor\datatables\buttons\dataTables.buttons.min.js" />
+    <Content Include="assets_admin\vendor\datatables\buttons\jszip.min.js" />
+    <Content Include="assets_admin\vendor\datatables\buttons\pdfmake.min.js" />
+    <Content Include="assets_admin\vendor\datatables\buttons\vfs_fonts.js" />
+    <Content Include="assets_admin\vendor\datatables\custom\custom-datatables.js" />
+    <Content Include="assets_admin\vendor\datatables\dataTables.bootstrap.min.js" />
+    <Content Include="assets_admin\vendor\datatables\dataTables.bs5-custom.css" />
+    <Content Include="assets_admin\vendor\datatables\dataTables.bs5.css" />
+    <Content Include="assets_admin\vendor\datatables\dataTables.min.js" />
+    <Content Include="assets_admin\vendor\daterange\custom-daterange.js" />
+    <Content Include="assets_admin\vendor\daterange\daterange.css" />
+    <Content Include="assets_admin\vendor\daterange\daterange.js" />
+    <Content Include="assets_admin\vendor\input-masks\cleave-custom.js" />
+    <Content Include="assets_admin\vendor\input-masks\cleave-phone.js" />
+    <Content Include="assets_admin\vendor\input-masks\cleave.min.js" />
+    <Content Include="assets_admin\vendor\input-tags\tagsinput-custom.js" />
+    <Content Include="assets_admin\vendor\input-tags\tagsinput.css" />
+    <Content Include="assets_admin\vendor\input-tags\tagsinput.min.js" />
+    <Content Include="assets_admin\vendor\input-tags\typeahead.js" />
+    <Content Include="assets_admin\vendor\mapael\custom\customers.js" />
+    <Content Include="assets_admin\vendor\mapael\custom\plotted-cities.js" />
+    <Content Include="assets_admin\vendor\mapael\custom\population.js" />
+    <Content Include="assets_admin\vendor\mapael\custom\range-areas.js" />
+    <Content Include="assets_admin\vendor\mapael\jquery.mapael.min.js" />
+    <Content Include="assets_admin\vendor\mapael\maps\france_departments.min.js" />
+    <Content Include="assets_admin\vendor\mapael\maps\usa_states.min.js" />
+    <Content Include="assets_admin\vendor\mapael\maps\world_countries.min.js" />
+    <Content Include="assets_admin\vendor\morris\custom\area.js" />
+    <Content Include="assets_admin\vendor\morris\custom\barColors.js" />
+    <Content Include="assets_admin\vendor\morris\custom\dayData.js" />
+    <Content Include="assets_admin\vendor\morris\custom\donutColors.js" />
+    <Content Include="assets_admin\vendor\morris\custom\donutFormatter.js" />
+    <Content Include="assets_admin\vendor\morris\custom\morrisBar.js" />
+    <Content Include="assets_admin\vendor\morris\custom\negativeValues.js" />
+    <Content Include="assets_admin\vendor\morris\custom\stackedBar.js" />
+    <Content Include="assets_admin\vendor\morris\morris.css" />
+    <Content Include="assets_admin\vendor\morris\morris.min.js" />
+    <Content Include="assets_admin\vendor\morris\raphael-min.js" />
+    <Content Include="assets_admin\vendor\nouislider\css\nouislider.css" />
+    <Content Include="assets_admin\vendor\nouislider\js\nouislider.js" />
+    <Content Include="assets_admin\vendor\overlay-scroll\custom-scrollbar.js" />
+    <Content Include="assets_admin\vendor\overlay-scroll\jquery.overlayScrollbars.min.js" />
+    <Content Include="assets_admin\vendor\overlay-scroll\OverlayScrollbars.min.css" />
+    <Content Include="assets_admin\vendor\quill\custom.js" />
+    <Content Include="assets_admin\vendor\quill\quill.core.css" />
+    <Content Include="assets_admin\vendor\quill\quill.min.js" />
+    <Content Include="assets_admin\vendor\rating\raty-custom.js" />
+    <Content Include="assets_admin\vendor\rating\raty.js" />
+    <Content Include="assets_admin\vendor\wizard\wizard-custom.js" />
+    <Content Include="assets_admin\vendor\wizard\wizard.css" />
+    <Content Include="assets_admin\vendor\wizard\wizard.min.js" />
+    <Content Include="Global.asax" />
+    <Content Include="assets\css\animate.min.css" />
+    <Content Include="assets\css\bootstrap.min.css" />
+    <Content Include="assets\css\fontawesome.min.css" />
+    <Content Include="assets\css\images\ui-icons_444444_256x240.png" />
+    <Content Include="assets\css\images\ui-icons_555555_256x240.png" />
+    <Content Include="assets\css\images\ui-icons_777620_256x240.html" />
+    <Content Include="assets\css\images\ui-icons_777777_256x240.html" />
+    <Content Include="assets\css\images\ui-icons_cc0000_256x240.html" />
+    <Content Include="assets\css\images\ui-icons_ffffff_256x240.html" />
+    <Content Include="assets\css\jquery-ui.min.css" />
+    <Content Include="assets\css\magnific-popup.min.css" />
+    <Content Include="assets\css\meanmenu.css" />
+    <Content Include="assets\css\nice-select.css" />
+    <Content Include="assets\css\owl.carousel.min.css" />
+    <Content Include="assets\css\owl.video.play.html" />
+    <Content Include="assets\css\responsive.css" />
+    <Content Include="assets\css\style.css" />
+    <Content Include="assets\css\swiper.min.css" />
+    <Content Include="assets\img\404.png" />
+    <Content Include="assets\img\about-1.jpg" />
+    <Content Include="assets\img\about-2.jpg" />
+    <Content Include="assets\img\banner-bg.jpg" />
+    <Content Include="assets\img\blog-details\blog-details-1.jpg" />
+    <Content Include="assets\img\blog-details\blog-details-2.jpg" />
+    <Content Include="assets\img\blog-details\blog-details-3.jpg" />
+    <Content Include="assets\img\blog\blog-1.jpg" />
+    <Content Include="assets\img\blog\blog-2.jpg" />
+    <Content Include="assets\img\blog\blog-3.jpg" />
+    <Content Include="assets\img\blog\blog-4.jpg" />
+    <Content Include="assets\img\blog\blog-5.jpg" />
+    <Content Include="assets\img\blog\blog-6.jpg" />
+    <Content Include="assets\img\client\comment-1.jpg" />
+    <Content Include="assets\img\client\comment-2.jpg" />
+    <Content Include="assets\img\client\comment-3.jpg" />
+    <Content Include="assets\img\client\testimonial-1.jpg" />
+    <Content Include="assets\img\client\testimonial-2.jpg" />
+    <Content Include="assets\img\client\testimonial-3.jpg" />
+    <Content Include="assets\img\client\testimonial-logo-1.png" />
+    <Content Include="assets\img\client\testimonial-logo-2.png" />
+    <Content Include="assets\img\client\testimonial-logo-3.png" />
+    <Content Include="assets\img\discount.png" />
+    <Content Include="assets\img\favicon.png" />
+    <Content Include="assets\img\gallery\gallery-1.jpg" />
+    <Content Include="assets\img\gallery\gallery-2.jpg" />
+    <Content Include="assets\img\gallery\gallery-3.jpg" />
+    <Content Include="assets\img\gallery\gallery-4.jpg" />
+    <Content Include="assets\img\gallery\gallery-5.jpg" />
+    <Content Include="assets\img\gallery\gallery-6.jpg" />
+    <Content Include="assets\img\icons\features-icon-1.svg" />
+    <Content Include="assets\img\icons\features-icon-2.svg" />
+    <Content Include="assets\img\icons\features-icon-3.svg" />
+    <Content Include="assets\img\logo-black.png" />
+    <Content Include="assets\img\logo.png" />
+    <Content Include="assets\img\map_pin.png" />
+    <Content Include="assets\img\menu-bg.jpg" />
+    <Content Include="assets\img\menu\menu-img-1.jpg" />
+    <Content Include="assets\img\menu\menu-img-10.jpg" />
+    <Content Include="assets\img\menu\menu-img-11.jpg" />
+    <Content Include="assets\img\menu\menu-img-12.jpg" />
+    <Content Include="assets\img\menu\menu-img-2.jpg" />
+    <Content Include="assets\img\menu\menu-img-3.jpg" />
+    <Content Include="assets\img\menu\menu-img-4.jpg" />
+    <Content Include="assets\img\menu\menu-img-5.jpg" />
+    <Content Include="assets\img\menu\menu-img-6.jpg" />
+    <Content Include="assets\img\menu\menu-img-7.jpg" />
+    <Content Include="assets\img\menu\menu-img-8.jpg" />
+    <Content Include="assets\img\menu\menu-img-9.jpg" />
+    <Content Include="assets\img\offer.png" />
+    <Content Include="assets\img\page-title-bg-2.html" />
+    <Content Include="assets\img\page-title-bg-3.html" />
+    <Content Include="assets\img\partner-logo\client-1.jpg" />
+    <Content Include="assets\img\partner-logo\client-10.jpg" />
+    <Content Include="assets\img\partner-logo\client-2.jpg" />
+    <Content Include="assets\img\partner-logo\client-3.jpg" />
+    <Content Include="assets\img\partner-logo\client-4.jpg" />
+    <Content Include="assets\img\partner-logo\client-5.jpg" />
+    <Content Include="assets\img\partner-logo\client-6.jpg" />
+    <Content Include="assets\img\partner-logo\client-7.jpg" />
+    <Content Include="assets\img\partner-logo\client-8.jpg" />
+    <Content Include="assets\img\partner-logo\client-9.jpg" />
+    <Content Include="assets\img\play-button-light.svg" />
+    <Content Include="assets\img\team\team-1.jpg" />
+    <Content Include="assets\img\team\team-2.jpg" />
+    <Content Include="assets\img\team\team-3.jpg" />
+    <Content Include="assets\img\team\team-4.jpg" />
+    <Content Include="assets\js\ajax.mail.js" />
+    <Content Include="assets\js\bootstrap.min.js" />
+    <Content Include="assets\js\gmap3.min.js" />
+    <Content Include="assets\js\isotope.pkgd.min.js" />
+    <Content Include="assets\js\jquery-ui.min.js" />
+    <Content Include="assets\js\jquery.appear.min.js" />
+    <Content Include="assets\js\jquery.counterup.min.js" />
+    <Content Include="assets\js\jquery.magnific-popup.min.js" />
+    <Content Include="assets\js\jquery.meanmenu.js" />
+    <Content Include="assets\js\jquery.min.js" />
+    <Content Include="assets\js\jquery.nice-select.min.js" />
+    <Content Include="assets\js\jquery.waypoints.min.js" />
+    <Content Include="assets\js\main.js" />
+    <Content Include="assets\js\map.js" />
+    <Content Include="assets\js\owl.carousel.min.js" />
+    <Content Include="assets\js\swiper.min.js" />
+    <Content Include="assets\js\wow.min.js" />
+    <Content Include="Images\Avatar\avatar4.png" />
+    <Content Include="Images\bg5.jpg" />
+    <Content Include="Images\logo.png" />
+    <Content Include="Images\MonAn\banh_mi_thit.jpg" />
+    <Content Include="Images\MonAn\bap-cai-cuon.jpg" />
+    <Content Include="Images\MonAn\bun_cha.jpg" />
+    <Content Include="Images\MonAn\bun_rieu_chay.jpg" />
+    <Content Include="Images\MonAn\ca-tim-xao-chay.jpg" />
+    <Content Include="Images\MonAn\cai-thao-xao-giam.jpg" />
+    <Content Include="Images\MonAn\canh-bi-do-nau-nam.jpg" />
+    <Content Include="Images\MonAn\canh-chua-chay.jpg" />
+    <Content Include="Images\MonAn\canh-khoai-mo-chay.jpg" />
+    <Content Include="Images\MonAn\canh-nam-ca-chua.jpg" />
+    <Content Include="Images\MonAn\canh-nam-hat-sen.jpg" />
+    <Content Include="Images\MonAn\canh-rau-xa-lach-xoong-chay.jpg" />
+    <Content Include="Images\MonAn\cha-bap.jpg" />
+    <Content Include="Images\MonAn\com_chien_duong_chau.jpg" />
+    <Content Include="Images\MonAn\com_tam.jpg" />
+    <Content Include="Images\MonAn\dau-co-ve-xao-vung.jpg" />
+    <Content Include="Images\MonAn\dau-hu-xao-mang-tuoi.jpg" />
+    <Content Include="Images\MonAn\dau-phu-non-hap-nam.png" />
+    <Content Include="Images\MonAn\dau_hu_sot_ca.jpg" />
+    <Content Include="Images\MonAn\dua-chuot-muoi-chay.jpg" />
+    <Content Include="Images\MonAn\goi-xoai-chay.jpg" />
+    <Content Include="Images\MonAn\goi_cuon_chay.jpg" />
+    <Content Include="Images\MonAn\kho-qua-xao-dau-hu-ca-rot.jpg" />
+    <Content Include="Images\MonAn\khoai-tay-xao.jpg" />
+    <Content Include="Images\MonAn\lau_thai.jpg" />
+    <Content Include="Images\MonAn\nam-bao-ngu-chien.jpg" />
+    <Content Include="Images\MonAn\nam-dui-ga-xao.jpg" />
+    <Content Include="Images\MonAn\pho_chay.jpg" />
+    <Content Include="Images\MonAn\salad_rau_cu.jpg" />
+    <Content Include="Images\MonAn\spaghetti_chay.jpg" />
+    <Content Include="Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\Admin_DatBanController.cs" />
+    <Compile Include="Controllers\Admin_GiamGiaController.cs" />
+    <Compile Include="Controllers\Admin_HoaDonController.cs" />
+    <Compile Include="Controllers\Admin_MonAnController.cs" />
+    <Compile Include="Controllers\Admin_NguyenLieuController.cs" />
+    <Compile Include="Controllers\Admin_XuatKhoController.cs" />
+    <Compile Include="Controllers\DanhGiaController.cs" />
+    <Compile Include="Controllers\DatBanController.cs" />
+    <Compile Include="Controllers\GioHangController.cs" />
+    <Compile Include="Controllers\KhachHangController.cs" />
+    <Compile Include="Controllers\MonAnController.cs" />
+    <Compile Include="Controllers\NhaHangController.cs" />
+    <Compile Include="Controllers\PhieuGoiMonController.cs" />
+    <Compile Include="Controllers\QuanLyBanController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Ban.cs" />
+    <Compile Include="Models\ChiTietHoaDon.cs" />
+    <Compile Include="Models\ChiTietNhapKhoViewModel.cs" />
+    <Compile Include="Models\ChiTietPhieuGoiMon.cs" />
+    <Compile Include="Models\ChiTietXuatKhoViewModel.cs" />
+    <Compile Include="Models\ConnectBan.cs" />
+    <Compile Include="Models\ConnectDanhGia.cs" />
+    <Compile Include="Models\ConnectHoaDon.cs" />
+    <Compile Include="Models\DanhGia.cs" />
+    <Compile Include="Models\GioHang.cs" />
+    <Compile Include="Models\HoaDon.cs" />
+    <Compile Include="Models\Kho.cs" />
+    <Compile Include="Models\KetNoiTaiKhoan.cs" />
+    <Compile Include="Models\KhachHang.cs" />
+    <Compile Include="Models\MaGiamGia.cs" />
+    <Compile Include="Models\MonAn.cs" />
+    <Compile Include="Models\NhanVien.cs" />
+    <Compile Include="Models\PhieuDatBan.cs" />
+    <Compile Include="Models\PhieuGoiMon.cs" />
+    <Compile Include="Models\TaiKhoan.cs" />
+    <Compile Include="Models\ViewThanhToan.cs" />
+    <Compile Include="Models\XuLyDatBan.cs" />
+    <Compile Include="Models\XuLyGiamGia.cs" />
+    <Compile Include="Models\XuLyHoaDon.cs" />
+    <Compile Include="Models\XuLyNguyenLieu.cs" />
+    <Compile Include="Models\XuLyPhieuGoiMon.cs" />
+    <Compile Include="Models\XuLyThanhToan.cs" />
+    <Compile Include="Models\XuLyThongTinKhachHang.cs" />
+    <Compile Include="Models\XuLyThongTinMonAn.cs" />
+    <Compile Include="Models\XuLyThongTinNhanVien.cs" />
+    <Compile Include="Models\XuLyXuatKho.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\web.config" />
+    <Content Include="assets_admin\fonts\bootstrap\bootstrap-icons.woff" />
+    <Content Include="assets_admin\fonts\bootstrap\bootstrap-icons.woff2" />
+    <None Include="packages.config" />
+    <Content Include="Views\Account\DangKy.cshtml" />
+    <Content Include="Views\Account\AConfirmEmail.cshtml" />
+    <Content Include="Views\Account\ConfirmEmail.cshtml" />
+    <Content Include="Views\Account\DangNhap.cshtml" />
+    <Content Include="Views\Account\RequestOtp.cshtml" />
+    <Content Include="Views\Account\ResetPassword.cshtml" />
+    <Content Include="Views\Account\XacThuc.cshtml" />
+    <Content Include="assets\fonts\fa-brands-400.ttf" />
+    <Content Include="assets\fonts\fa-brands-400.woff2" />
+    <Content Include="assets\fonts\fa-regular-400.ttf" />
+    <Content Include="assets\fonts\fa-regular-400.woff2" />
+    <Content Include="assets\fonts\fa-solid-900.ttf" />
+    <Content Include="assets\fonts\fa-solid-900.woff2" />
+    <Content Include="assets\fonts\fa-v4compatibility.ttf" />
+    <Content Include="assets\fonts\fa-v4compatibility.woff2" />
+    <Content Include="Views\KhachHang\Profile.cshtml" />
+    <Content Include="Views\MonAn\DanhSachMonAn.cshtml" />
+    <Content Include="Views\GioHang\HienThiGioHang.cshtml" />
+    <Content Include="Views\GioHang\CartItemsPartial.cshtml" />
+    <Content Include="Views\Share\layout_user.cshtml" />
+    <Content Include="Views\Account\Welcome.cshtml" />
+    <Content Include="Views\MonAn\Menu.cshtml" />
+    <Content Include="Views\Admin\HienThiAdmin.cshtml" />
+    <Content Include="Views\Admin\NhapKho.cshtml" />
+    <Content Include="Views\KhachHang\NhapThongTinKhachHang.cshtml" />
+    <Content Include="Views\Share\layuot_admin.cshtml" />
+    <Content Include="Views\Admin_MonAn\DanhSachMonAn.cshtml" />
+    <Content Include="Views\Admin_HoaDon\HienThiHoaDon.cshtml" />
+    <Content Include="Views\Admin_HoaDon\HienThiChiTietHoaDon.cshtml" />
+    <Content Include="Views\Admin_HoaDon\ThemHoaDon.cshtml" />
+    <Content Include="Views\NhaHang\ShowHD.cshtml" />
+    <Content Include="Views\NhaHang\ShowCTHD.cshtml" />
+    <Content Include="Views\QuanLyBan\ShowBan.cshtml" />
+    <Content Include="Views\GioHang\HienThiHoaDonVaQRThanhToan.cshtml" />
+    <Content Include="Views\Admin_HoaDon\chitietNhapKho.cshtml" />
+    <Content Include="Views\Admin_HoaDon\_tableNguyenLieu.cshtml" />
+    <Content Include="Views\admin_nguyenlieu\HienThiNguyenLieu.cshtml" />
+    <Content Include="Views\admin_xuatkho\chitietXuatKho.cshtml" />
+    <Content Include="Views\admin_xuatkho\HienThiXuatKho.cshtml" />
+    <Content Include="Views\admin_xuatkho\ThemPhieuXuatKho.cshtml" />
+    <Content Include="Views\admin_xuatkho\_tableNguyenLieu.cshtml" />
+    <Content Include="Views\DatBan\DatBan.cshtml" />
+    <Content Include="Views\PhieuGoiMon\ChiTietPhieu.cshtml" />
+    <Content Include="Views\PhieuGoiMon\DanhSachPhieuGoiMon.cshtml" />
+    <Content Include="Views\PhieuGoiMon\ThemPhieuGoiMon.cshtml" />
+    <Content Include="Views\PhieuGoiMon\XuatHoaDon.cshtml" />
+    <Content Include="Views\Admin_DatBan\DatBan.cshtml" />
+    <Content Include="Views\Admin_GiamGia\TaoMaGiamGia.cshtml" />
+    <Content Include="Views\Admin_GiamGia\HienThiMaGiamGia.cshtml" />
+    <Content Include="Views\KhachHang\lichSuDonHang.cshtml" />
+    <Content Include="Views\KhachHang\ShowCTHD.cshtml" />
+    <Content Include="Views\KhachHang\DoiMaGiamGia.cshtml" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>63841</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>https://localhost:44344/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

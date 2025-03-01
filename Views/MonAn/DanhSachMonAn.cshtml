@@ -1,0 +1,51 @@
+﻿@model List<QL_NhaHang_ADO.Models.MonAn>
+
+@*<h2>Danh sách món ăn</h2>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Mã món ăn</th>
+                <th>Mã khách hàng</th>
+                <th>Tên món</th>
+                <th>Loại món</th>
+                <th>Giá</th>
+                <th>Hình ảnh</th>
+            </tr>
+        </thead>
+        <tbody>*@
+
+@foreach (var monAn in Model)
+{
+    <div class="single-box-menu" @*style="width:100%; display:block; height:fit-content"*@>
+        <div class="food-image" style="width:100px; height:100px;">
+            <img style="width:100%; height:100%; object-fit:cover" src="@Url.Content("/Images/MonAn/" + monAn.AnhMon)" />
+        </div>
+        <div class="menu-content">
+            <h4>@monAn.TenMon <span class="price">@((monAn.Gia).ToString("N0")) đ</span></h4>
+            <div style="display:flex; align-items:center; justify-content:space-between">
+                <p style="max-width:850px">Bánh mì là một món ăn đường phố nổi tiếng của Việt Nam, được yêu thích bởi sự kết hợp độc đáo giữa bánh mì giòn rụm và các nguyên liệu phong phú bên trong. Thông thường, bánh mì được kẹp với thịt nướng, chả lụa, pate, rau thơm, dưa leo, đồ chua và được rưới thêm chút nước sốt đậm đà.</p>
+
+                <i style="font-size: 30px; color: #ff8d25; margin-right:20px; cursor: pointer;"
+                   class="fa-solid fa-circle-plus"
+                   onclick="addToCart('@monAn.MaMonAn', '@monAn.TenMon', @monAn.Gia,1, '@monAn.AnhMon')"></i>
+
+            </div>
+        </div>
+    </div>
+
+   
+         @*<tr>
+            <td>@monAn.MaMonAn</td>
+            <td>@monAn.MaKH</td>
+            <td>@monAn.TenMon</td>
+            <td>@monAn.LoaiMon</td>
+            <td>@monAn.Gia</td>
+            <td>
+                <img src="@Url.Content("~/images/" + monAn.AnhMon)" alt="@monAn.TenMon" width="100" />
+            </td>
+        </tr>*@
+         }
+         @*</tbody>
+    </table>*@
+
